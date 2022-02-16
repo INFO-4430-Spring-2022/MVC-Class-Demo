@@ -1,0 +1,13 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<string> rbTypes = new List<string>() 
+    { "A&W", "Barq's", "Mug", "Old Fashioned" };
+}
+<h1>Types of Root Beer</h1>
+<ul>
+    @for (var i = 0; i < rbTypes.Count; i++) {
+    <li class="stuff" value="@i" >@rbTypes[i]</li>
+    }
+</ul>
