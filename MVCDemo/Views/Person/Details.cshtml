@@ -1,0 +1,12 @@
+﻿@model Person
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+@if(Model.FirstName.Length > 2){
+@Model.FirstName
+@Model.LastName
+}
+
