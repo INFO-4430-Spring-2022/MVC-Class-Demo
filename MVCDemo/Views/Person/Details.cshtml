@@ -1,12 +1,17 @@
 ﻿@model Person
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Any page";
 }
 
 <h1>Details</h1>
 
 @if(Model.FirstName.Length > 2){
-@Model.FirstName
-@Model.LastName
+    @Model.FirstName
+    @Model.LastName
 }
+
+@for (int i = 0; i < Model.LastName.Length; i++){
+    <span>@Model.LastName[i]</span>
+}
+
 
