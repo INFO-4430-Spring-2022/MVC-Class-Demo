@@ -1,0 +1,20 @@
+﻿<h1>About ThingTypes</h1>
+@{
+    int a = 5;
+    a += 2;
+}
+@if (ViewData["Stuff"] != null) {
+    <strong>@ViewData["Stuff"]</strong>
+}else{
+       <strong>hunh??</strong>
+}
+
+<form action="" method="post">
+    <label>Value</label>
+    <input name="value" />
+    <label>Number</label>
+    <input name="number" />
+    <label>Yes or No</label>
+    <input type="checkbox" name="yesNo" />
+    <input type="submit" />
+</form>

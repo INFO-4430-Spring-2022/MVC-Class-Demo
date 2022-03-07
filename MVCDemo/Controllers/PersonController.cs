@@ -65,7 +65,5 @@ namespace MVCDemo.Controllers {
             newP.DateOfBirth = DateTime.Now;
             return View(newP);
         }
-
-
     }
 }
