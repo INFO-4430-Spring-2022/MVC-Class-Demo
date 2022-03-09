@@ -3,21 +3,29 @@ using MVCDemo.Models;
 
 namespace MVCDemo.Controllers {
     public class PersonController : Controller {
+
+        private DAL _DAL;
+
+        public PersonController() {
+            _DAL = new DAL();
+        }
+
+
         public IActionResult Index() {
             //ViewBag.Pizza = "Pepperoni";
             //ViewData["IceCream"] = "Chocolate";
-            return View("List", GetPeople());
+            return View("List", _DAL.GetPeople());
         }
 
-        public List<Person> GetPeople() {
-            List<Person> lst = new List<Person>();
-            lst.Add(getBob());
-            lst.Add(new Person() { FirstName = "Sally", LastName = "Smith" });
-            lst.Add(new Person() { FirstName = "Jerry", LastName = "Gerison" });
-            lst.Add(new Person() { FirstName = "Gus", LastName = "Guster" });
+        //public List<Person> GetPeople() {
+        //    List<Person> lst = new List<Person>();
+        //    lst.Add(getBob());
+        //    lst.Add(new Person() { FirstName = "Sally", LastName = "Smith" });
+        //    lst.Add(new Person() { FirstName = "Jerry", LastName = "Gerison" });
+        //    lst.Add(new Person() { FirstName = "Gus", LastName = "Guster" });
 
-            return lst;
-        }
+        //    return lst;
+        //}
 
 
         public Person getBob() {
@@ -50,14 +58,22 @@ namespace MVCDemo.Controllers {
         }
 
         [HttpGet]
-        public IActionResult Edit() {
-            return View(getBob());
+        public IActionResult Edit(int? id) {
+            Person p;
+            if (id != null) {
+                p = _DAL.GetPerson((int)id);
+            } else {
+                p = new Person() {FirstName ="John", LastName= "Doe" };
+            }
+            return View(p);
         }
 
         [HttpPost]
-        public IActionResult Edit(int id,
-            string firstName) {
-            return View(getBob());
+        //public IActionResult Edit(int id,
+        //    string firstName, string lastname, bool isManager, string emailaddress) {
+        public IActionResult Edit([FromRoute]int? id,
+            [Bind("FirstName","LastName","Prefix","HomePage")] Person per) {
+            return View(per);
         }
 
         public IActionResult Create() {
