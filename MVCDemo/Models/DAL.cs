@@ -39,7 +39,8 @@ namespace MVCDemo.Models {
 
             try {
                SqlConnection conn = new SqlConnection(
-                   "Server = localhost; Database = MVCDemo; User Id = mvcdemouser; Password = pass1234;");
+                   "Server = localhost; Database = MVCDemo;Trusted_Connection=True;Encrypt=False");
+                    //"Server = localhost; Database = MVCDemo; User Id = mvcdemouser; Password = pass1234;");
                 conn.Open();
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = conn;
