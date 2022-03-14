@@ -11,22 +11,31 @@
         // UPDATE Edit
         // DELETE Disable
 
+        public static List<Person> _People = null;
 
-        public List<Person> GetPeople() { // READ ALL
-            List<Person> people = new List<Person>();
-            people.Add(new Person() {ID=1, FirstName = "Bob", LastName="Awesome" });
-            people.Add(new Person() {ID=2, FirstName = "Michael", LastName = "Scott" });
-            people.Add(new Person() {ID=3, FirstName = "Bruce", LastName = "Banner" });
-            people.Add(new Person() {ID=4, FirstName = "Chris", LastName = "Lass" });
-            people.Add(new Person() {ID=5, FirstName = "Wayde", LastName = "Wilson" });
-            people.Add(new Person() {ID=6, FirstName = "Zach", LastName = "Daniels" });
-            people.Add(new Person() {ID=7, FirstName = "Leroy", LastName = "Jenkins" });
-            people.Add(new Person() {ID=8, FirstName = "Hulk", LastName = "Hogan" });
-            people.Add(new Person() {ID=9, FirstName = "Greg", LastName = "Williams" });
-            people.Add(new Person() {ID=10, FirstName = "Jack", LastName = "Black" });
-            people.Add(new Person() {ID=11, FirstName = "Sally", LastName = "Super" });
+        private static List<Person> GetPeopleList() {
+            return new List<Person>() {
+                new Person() { ID = 1, FirstName = "Bob", LastName = "Awesome" },
+                new Person() { ID = 2, FirstName = "Michael", LastName = "Scott" },
+                new Person() { ID = 3, FirstName = "Bruce", LastName = "Banner" },
+                new Person() { ID = 4, FirstName = "Chris", LastName = "Lass" },
+                new Person() { ID = 5, FirstName = "Wayde", LastName = "Wilson" },
+                new Person() { ID = 6, FirstName = "Zach", LastName = "Daniels" },
+                new Person() { ID = 12, FirstName = "Samantha", LastName = "Day" },
+                new Person() { ID = 7, FirstName = "Leroy", LastName = "Jenkins" },
+                new Person() { ID = 8, FirstName = "Hulk", LastName = "Hogan" },
+                new Person() { ID = 9, FirstName = "Greg", LastName = "Williams" },
+                new Person() { ID = 10, FirstName = "Jack", LastName = "Black" },
+                new Person() { ID = 11, FirstName = "Sally", LastName = "Super" }
+            };
+        }
 
-            return people;
+
+            public List<Person> GetPeople() { // READ ALL
+            if (_People == null) {
+                _People = GetPeopleList();
+            }
+            return _People;
         }
 
         public Person GetPerson(int id) { // READ One
@@ -41,6 +50,22 @@
             return person;
         }
 
+        internal void UpdatePerson(Person newPersonData) {
 
+            int idOfPersonToChange = newPersonData.ID;
+            Person oriPerson = GetPerson(idOfPersonToChange);
+
+            oriPerson.FirstName = newPersonData.FirstName;
+            oriPerson.LastName = newPersonData.LastName;
+            oriPerson.Email = newPersonData.Email;
+            oriPerson.IsManager = newPersonData.IsManager;
+            oriPerson.Prefix = newPersonData.Prefix;
+            oriPerson.Phone = newPersonData.Phone;
+            oriPerson.Homepage = newPersonData.Homepage;
+            oriPerson.DateOfBirth = newPersonData.DateOfBirth;
+            oriPerson.Postfix = newPersonData.Postfix;
+
+
+        }
     }
 }

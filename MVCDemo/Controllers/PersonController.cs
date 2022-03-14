@@ -63,7 +63,7 @@ namespace MVCDemo.Controllers {
             if (id != null) {
                 p = _DAL.GetPerson((int)id);
             } else {
-                p = new Person() {FirstName ="John", LastName= "Doe" };
+                p = new Person() { FirstName = "John", LastName = "Doe" };
             }
             return View(p);
         }
@@ -71,9 +71,18 @@ namespace MVCDemo.Controllers {
         [HttpPost]
         //public IActionResult Edit(int id,
         //    string firstName, string lastname, bool isManager, string emailaddress) {
-        public IActionResult Edit([FromRoute]int? id,
-            [Bind("FirstName","LastName","Prefix","HomePage")] Person per) {
-            return View(per);
+        public IActionResult Edit([FromRoute] int? id,
+            Person per) {
+            //[Bind("FirstName", "LastName", "Prefix", "HomePage")] Person per) {
+
+            _DAL.UpdatePerson(per);
+            if (true) {
+                // no errors
+                return RedirectToAction("Index");
+            } else {
+                // you had errors
+                return View(per);
+            }
         }
 
         public IActionResult Create() {
