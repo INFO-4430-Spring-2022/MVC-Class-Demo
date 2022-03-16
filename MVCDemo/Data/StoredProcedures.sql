@@ -192,6 +192,28 @@ GO
 -- GRANT EXECUTE ON dbo.sprocThingsGetAll TO db_reader
 -- GO 
 
+-- =============================================
+-- Author:		Jon Holmes
+-- Create date:	14 Mar 2022
+-- Description:	Retrieve all Things from the database.
+-- =============================================
+CREATE PROCEDURE dbo.sprocThingsGetForPerson
+@PersonID int 
+AS
+BEGIN
+     -- SET NOCOUNT ON added to prevent extra result sets from
+     -- interfering with SELECT statements.
+     SET NOCOUNT ON;
+
+     SELECT * FROM Things t
+        JOIN PeopleThings pt ON t.ThingID = pt.ThingID
+        WHERE pt.PersonID = @PersonID
+END
+GO
+
+-- GRANT EXECUTE ON dbo.sprocThingsGetForPerson TO db_reader
+-- GO 
+
 
 -- =============================================
 -- Author:		Jon Holmes

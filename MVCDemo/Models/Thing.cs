@@ -24,20 +24,21 @@ namespace MVCDemo.Models {
         internal const string db_ID = "ThingID";
         internal const string db_Name = "Name";
         internal const string db_Description = "Description";
-        internal const string db_Type = "TypeID";
+        internal const string db_Type = "ThingTypeID";
 
         #endregion
 
         #region Private Variables
         private string _Name;
         private string _Description;
-        private int _Type;
+        private int _TypeID;
+        private ThingType _Type;
 
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets or sets the Name for this Creation_and_Inserts.Thing object.
+        /// Gets or sets the Name for this Thing object.
         /// </summary>
         /// <remarks></remarks>
         public string Name {
@@ -50,7 +51,7 @@ namespace MVCDemo.Models {
         }
 
         /// <summary>
-        /// Gets or sets the Description for this Creation_and_Inserts.Thing object.
+        /// Gets or sets the Description for this Thing object.
         /// </summary>
         /// <remarks></remarks>
         public string Description {
@@ -63,11 +64,27 @@ namespace MVCDemo.Models {
         }
 
         /// <summary>
-        /// Gets or sets the Type for this Creation_and_Inserts.Thing object.
+        /// Gets or sets the Type for this Thing object.
         /// </summary>
         /// <remarks></remarks>
-        public int Type {
+        public int TypeID {
             get {
+                return _TypeID;
+            }
+            set {
+                _TypeID = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the Type for this Thing object.
+        /// </summary>
+        /// <remarks></remarks>
+        public ThingType Type {
+            get {
+                if (_Type == null) {
+                    _Type = fDAL.GetThingType(_TypeID);
+                }
                 return _Type;
             }
             set {
@@ -115,7 +132,7 @@ namespace MVCDemo.Models {
             _ID = (int)dr[db_ID];
             _Name = (string)dr[db_Name];
             _Description = (string)dr[db_Description];
-            _Type = (int)dr[db_Type];
+            _TypeID = (int)dr[db_Type];
         }
 
         #endregion

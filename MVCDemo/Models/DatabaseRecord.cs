@@ -3,7 +3,8 @@ using Microsoft.Data.SqlClient;
 
 namespace MVCDemo.Models {
     public abstract class DatabaseRecord {
-        protected int _ID;
+        protected int _ID = -1; // -1 means add, starting with assuming we will add to Database
+
         [Key]
         public int ID {
             get { return _ID; }

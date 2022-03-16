@@ -118,7 +118,7 @@ namespace MVCDemo.Models {
 
         #region ThingType
         /// <summary>
-        /// Gets the Creation_and_Inserts.ThingType correposponding with the given ID
+        /// Gets the ThingType correposponding with the given ID
         /// </summary>
         /// <remarks></remarks>
 
@@ -138,7 +138,7 @@ namespace MVCDemo.Models {
 
 
         /// <summary>
-        /// Gets the Creation_and_Inserts.ThingTypecorresponding with the given ID
+        /// Gets the ThingTypecorresponding with the given ID
         /// </summary>
         /// <remarks></remarks>
 
@@ -163,7 +163,7 @@ namespace MVCDemo.Models {
 
 
         /// <summary>
-        /// Gets a list of all Creation_and_Inserts.ThingType objects from the database.
+        /// Gets a list of all ThingType objects from the database.
         /// </summary>
         /// <remarks></remarks>
         public static List<ThingType> GetThingTypes() {
@@ -248,7 +248,7 @@ namespace MVCDemo.Models {
 
         #region Thing
         /// <summary>
-        /// Gets the Creation_and_Inserts.Thing correposponding with the given ID
+        /// Gets the Thing correposponding with the given ID
         /// </summary>
         /// <remarks></remarks>
 
@@ -268,7 +268,7 @@ namespace MVCDemo.Models {
 
 
         /// <summary>
-        /// Gets the Creation_and_Inserts.Thingcorresponding with the given ID
+        /// Gets the Thingcorresponding with the given ID
         /// </summary>
         /// <remarks></remarks>
 
@@ -293,11 +293,35 @@ namespace MVCDemo.Models {
 
 
         /// <summary>
-        /// Gets a list of all Creation_and_Inserts.Thing objects from the database.
+        /// Gets a list of all Thing objects from the database.
         /// </summary>
         /// <remarks></remarks>
         public static List<Thing> GetThings() {
             SqlCommand comm = new SqlCommand("sprocThingsGetAll");
+            List<Thing> retList = new List<Thing>();
+            try {
+                SqlDataReader dr = GetDataReader(comm);
+                while (dr.Read()) {
+                    retList.Add(new Thing(dr));
+                }
+            } catch (Exception ex) {
+                DisplayException(ex);
+            } finally {
+                if (comm != null && comm.Connection != null) {
+                    comm.Connection.Close();
+                }
+            }
+            return retList;
+        }
+
+
+        /// <summary>
+        /// Gets a list of all Thing objects from the database.
+        /// </summary>
+        /// <remarks></remarks>
+        public static List<Thing> GetThings(Person p) {
+            SqlCommand comm = new SqlCommand("sprocThingsGetForPerson");
+            comm.Parameters.AddWithValue("@" + Person.db_ID, p.ID);
             List<Thing> retList = new List<Thing>();
             try {
                 SqlDataReader dr = GetDataReader(comm);
@@ -380,7 +404,7 @@ namespace MVCDemo.Models {
 
         #region Person
         /// <summary>
-        /// Gets the Creation_and_Inserts.Person correposponding with the given ID
+        /// Gets the Person correposponding with the given ID
         /// </summary>
         /// <remarks></remarks>
 
@@ -400,7 +424,7 @@ namespace MVCDemo.Models {
 
 
         /// <summary>
-        /// Gets the Creation_and_Inserts.Personcorresponding with the given ID
+        /// Gets the Personcorresponding with the given ID
         /// </summary>
         /// <remarks></remarks>
 
@@ -427,7 +451,7 @@ namespace MVCDemo.Models {
 
 
         /// <summary>
-        /// Gets a list of all Creation_and_Inserts.Person objects from the database.
+        /// Gets a list of all Person objects from the database.
         /// </summary>
         /// <remarks></remarks>
         public static List<Person> GetPeople() {
