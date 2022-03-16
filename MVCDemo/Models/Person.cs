@@ -1,9 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace MVCDemo.Models {
-    public class Person {
+    public class Person : DatabaseRecord {
+        #region Database String
+        internal const string db_ID = "PersonID";
+        internal const string db_FirstName = "FirstName";
+        internal const string db_LastName = "LastName";
+        internal const string db_DateOfBirth = "DateOfBirth";
+        internal const string db_IsManager = "IsManager";
+        internal const string db_Prefix = "Prefix";
+        internal const string db_Postfix = "Postfix";
+        internal const string db_Phone = "Phone";
+        internal const string db_Email = "Email";
+        internal const string db_Homepage = "Homepage";
+
+        #endregion
         #region Private Variables
-        private int _ID;
         private string _FirstName;
         private string _LastName;
         private DateTime _DateOfBirth;
@@ -17,13 +30,16 @@ namespace MVCDemo.Models {
 
         #endregion
 
-        #region Public Properties
-
-        [Key]
-        public int ID {
-            get { return _ID; }
-            set { _ID = value; }
+        #region Constructors
+        public Person() {
         }
+        internal Person(Microsoft.Data.SqlClient.SqlDataReader dr) {
+            Fill(dr);
+        }
+
+        #endregion
+
+        #region Public Properties
 
         [Display(Name = "First Name")]
         [Required]
@@ -88,9 +104,65 @@ namespace MVCDemo.Models {
             set { _Homepage = value; }
         }
 
+        #endregion
 
 
+        #region Public Functions
+        /// <summary>
+        /// Calls DAL function to add People to the database.
+        /// </summary>
+        /// <remarks></remarks>
+        public override int dbAdd() {
+            _ID = fDAL.AddPerson(this);
+            return ID;
+        }
+
+        /// <summary>
+        /// Calls DAL function to update People to the database.
+        /// </summary>
+        /// <remarks></remarks>
+        public override int dbUpdate() {
+            return fDAL.UpdatePerson(this);
+        }
+
+        /// <summary>
+        /// Calls DAL function to remove People from the database.
+        /// </summary>
+        /// <remarks></remarks>
+        public override int dbRemove() {
+            return fDAL.RemovePerson(this);
+        }
 
         #endregion
+
+        #region Public Subs
+        /// <summary>
+        /// Fills object from a SqlClient Data Reader
+        /// </summary>
+        /// <remarks></remarks>
+        public override void Fill(Microsoft.Data.SqlClient.SqlDataReader dr) {
+            _ID = (int)dr[db_ID];
+            _FirstName = (string)dr[db_FirstName];
+            _LastName = (string)dr[db_LastName];
+            _DateOfBirth = (DateTime)dr[db_DateOfBirth];
+            _IsManager = (bool)dr[db_IsManager];
+            _Prefix = (string)dr[db_Prefix];
+            _Postfix = (string)dr[db_Postfix];
+            _Phone = (string)dr[db_Phone];
+            _Email = (string)dr[db_Email];
+            _Homepage = (string)dr[db_Homepage];
+        }
+
+        #endregion
+
+        public override string ToString() {
+            return String.Format("{0} | {1} {2}", this.ID, this.FirstName, this.LastName);
+        }
+
+
+
+
+
+
     }
 }

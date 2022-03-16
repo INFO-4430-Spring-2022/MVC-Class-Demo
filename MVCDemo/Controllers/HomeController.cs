@@ -11,6 +11,7 @@ namespace MVCDemo.Controllers {
         }
 
         public IActionResult Index() {
+            Person person = fDAL.GetPerson(1);
             return View();
         }
 
