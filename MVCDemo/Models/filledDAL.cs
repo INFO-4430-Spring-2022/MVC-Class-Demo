@@ -352,7 +352,7 @@ namespace MVCDemo.Models {
             try {
                 comm.Parameters.AddWithValue("@" + Thing.db_Name, obj.Name);
                 comm.Parameters.AddWithValue("@" + Thing.db_Description, obj.Description);
-                comm.Parameters.AddWithValue("@" + Thing.db_Type, obj.Type);
+                comm.Parameters.AddWithValue("@" + Thing.db_Type, obj.TypeID);
                 return AddObject(comm, "@" + Thing.db_ID);
             } catch (Exception ex) {
                 DisplayException(ex);
@@ -373,7 +373,7 @@ namespace MVCDemo.Models {
                 comm.Parameters.AddWithValue("@" + Thing.db_ID, obj.ID);
                 comm.Parameters.AddWithValue("@" + Thing.db_Name, obj.Name);
                 comm.Parameters.AddWithValue("@" + Thing.db_Description, obj.Description);
-                comm.Parameters.AddWithValue("@" + Thing.db_Type, obj.Type);
+                comm.Parameters.AddWithValue("@" + Thing.db_Type, obj.TypeID);
                 return UpdateObject(comm);
             } catch (Exception ex) {
                 DisplayException(ex);

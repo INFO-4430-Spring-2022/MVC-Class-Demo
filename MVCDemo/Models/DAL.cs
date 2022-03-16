@@ -36,27 +36,34 @@ namespace MVCDemo.Models {
             public List<Person> GetPeople() { // READ ALL
 
             List<Person> retList = new List<Person>();
+                SqlCommand comm = new SqlCommand();
 
             try {
                SqlConnection conn = new SqlConnection(
                    "Server = localhost; Database = MVCDemo;Trusted_Connection=True;Encrypt=False");
                     //"Server = localhost; Database = MVCDemo; User Id = mvcdemouser; Password = pass1234;");
                 conn.Open();
-                SqlCommand comm = new SqlCommand();
                 comm.Connection = conn;
-                comm.CommandText = "SELECT * FROM People";
+                //comm.CommandText = "SELECT * FROM People" ;
+                comm.CommandText = "sprocPeopleGetAll";
+                comm.CommandType = System.Data.CommandType.StoredProcedure;
 
                 SqlDataReader dr = comm.ExecuteReader();
 
                 while (dr.Read()) {
                     Person pers = new Person();
                     pers.FirstName = dr["FirstName"].ToString();
-                    pers.FirstName = (string)dr["FirstName"];
+                    pers.LastName = (string)dr["LastName"];
                     retList.Add(pers);
                 }
             } catch (Exception ex) {
 
+            } finally {
+                if (comm.Connection != null) {
+                    comm.Connection.Close();
+                }
             }
+
 
             return retList;
 

@@ -4,6 +4,8 @@ using System;
 using System.Net;
 using System.Linq;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace MVCDemo.Models {
     /// <summary>
     /// TODO: Comment this
@@ -67,6 +69,7 @@ namespace MVCDemo.Models {
         /// Gets or sets the Type for this Thing object.
         /// </summary>
         /// <remarks></remarks>
+        //[Range(0,10,ErrorMessage ="Out of Range Dude")]
         public int TypeID {
             get {
                 return _TypeID;

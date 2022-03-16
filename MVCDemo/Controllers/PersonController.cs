@@ -14,7 +14,7 @@ namespace MVCDemo.Controllers {
         public IActionResult Index() {
             //ViewBag.Pizza = "Pepperoni";
             //ViewData["IceCream"] = "Chocolate";
-            return View("List", _DAL.GetPeople());
+            return View("List", fDAL.GetPeople());
         }
 
         //public List<Person> GetPeople() {

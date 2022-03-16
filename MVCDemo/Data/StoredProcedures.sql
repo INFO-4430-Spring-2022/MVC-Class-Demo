@@ -117,10 +117,10 @@ CREATE PROCEDURE dbo.sproc_ThingAdd
 @ThingID int OUTPUT,
 @Name nvarchar(30),
 @Description nvarchar(400),
-@TypeID int
+@ThingTypeID int
 AS
-     INSERT INTO Things(Name,Description,TypeID)
-               VALUES(@Name,@Description,@TypeID)
+     INSERT INTO Things(Name,Description,ThingTypeID)
+               VALUES(@Name,@Description,@ThingTypeID)
      SET @ThingID = @@IDENTITY
 GO
 
@@ -137,13 +137,13 @@ CREATE PROCEDURE dbo.sproc_ThingUpdate
 @ThingID int,
 @Name nvarchar(30),
 @Description nvarchar(400),
-@TypeID int
+@ThingTypeID int
 AS
      UPDATE Things
           SET
                Name = @Name,
                Description = @Description,
-               TypeID = @TypeID
+               ThingTypeID = @ThingTypeID
           WHERE ThingID = @ThingID
 GO
 
