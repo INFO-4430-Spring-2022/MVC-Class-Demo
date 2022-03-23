@@ -218,6 +218,35 @@ GO
 -- =============================================
 -- Author:		Jon Holmes
 -- Create date:	14 Mar 2022
+-- Description:	Remove specific Thing and Person Association from the database.
+-- =============================================
+CREATE PROCEDURE dbo.sproc_PersonThingRemove
+@PersonID int
+,@ThingID int
+AS
+BEGIN
+     DELETE FROM PeopleThings
+          WHERE ThingID = @ThingID
+		  AND PersonID = @PersonID
+
+     -- Return -1 if we had an error
+     IF @@ERROR > 0
+     BEGIN
+          RETURN -1
+     END
+     ELSE
+     BEGIN
+          RETURN 1
+     END
+END
+GO
+
+-- GRANT EXECUTE ON dbo.sproc_PersonThingRemove TO db_editor
+-- GO 
+
+-- =============================================
+-- Author:		Jon Holmes
+-- Create date:	14 Mar 2022
 -- Description:	Remove specific Thing from the database.
 -- =============================================
 CREATE PROCEDURE dbo.sproc_ThingRemove

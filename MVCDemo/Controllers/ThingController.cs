@@ -62,17 +62,29 @@ namespace MVCDemo.Controllers {
 
         // GET: Thing/Delete/5
         public ActionResult Delete(int id) {
-            return View();
+            Thing thg = fDAL.GetThing(id != null ? (int)id : -1);
+            return View(thg);
         }
 
         // POST: Thing/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Thing tng) {
-            try {
-                return RedirectToAction(nameof(Index));
-            } catch {
-                return View();
+        public ActionResult Delete(int id, string ok) {
+            
+            Thing thg = fDAL.GetThing(id != null ? (int)id : -1);
+            if (ok == "submitted") {
+                // form was submitted 
+                int rowsAffected = thg.dbRemove();
+                if (rowsAffected == 1) {
+                    // only one row deleted
+                    return RedirectToAction("Index");
+                } else {
+                    // oops something went wrong.
+                    return View(thg);
+                }
+            } else {
+                // not send from correct view
+                return View(thg);
             }
         }
     }

@@ -234,7 +234,7 @@ namespace MVCDemo.Models {
             if (obj == null) return -1;
             SqlCommand comm = new SqlCommand();
             try {
-                //comm.CommandText = //Insert Sproc Name Here;
+                comm.CommandText = "sproc_ThingTypeRemove";
                 comm.Parameters.AddWithValue("@" + ThingType.db_ID, obj.ID);
                 return UpdateObject(comm);
             } catch (Exception ex) {
@@ -390,7 +390,7 @@ namespace MVCDemo.Models {
             if (obj == null) return -1;
             SqlCommand comm = new SqlCommand();
             try {
-                //comm.CommandText = //Insert Sproc Name Here;
+                comm.CommandText = "sproc_ThingRemove";
                 comm.Parameters.AddWithValue("@" + Thing.db_ID, obj.ID);
                 return UpdateObject(comm);
             } catch (Exception ex) {
@@ -538,7 +538,7 @@ namespace MVCDemo.Models {
             if (obj == null) return -1;
             SqlCommand comm = new SqlCommand();
             try {
-                //comm.CommandText = //Insert Sproc Name Here;
+                comm.CommandText = "sproc_PersonRemove";
                 comm.Parameters.AddWithValue("@" + Person.db_ID, obj.ID);
                 return UpdateObject(comm);
             } catch (Exception ex) {
@@ -547,6 +547,25 @@ namespace MVCDemo.Models {
             return -1;
         }
 
+
+        /// <summary>
+        /// Attempts to delete the database entry corresponding to the Person
+        /// </summary>
+        /// <remarks></remarks>
+        internal static int RemovePersonThing(Person per, Thing thg) {
+            if (per == null || thg == null) return -1;
+            SqlCommand comm = new SqlCommand();
+            try {
+                comm.CommandText = "sproc_PersonThingRemove";
+                comm.Parameters.AddWithValue("@" + Person.db_ID, per.ID);
+                comm.Parameters.AddWithValue("@" + Thing.db_ID, thg.ID);
+
+                return UpdateObject(comm);
+            } catch (Exception ex) {
+                DisplayException(ex);
+            }
+            return -1;
+        }
 
 
 

@@ -48,6 +48,7 @@ namespace MVCDemo.Models {
                 return _Name;
             }
             set {
+                if (value == null) value = "";
                 _Name = value.Trim();
             }
         }
@@ -61,6 +62,7 @@ namespace MVCDemo.Models {
                 return _Description;
             }
             set {
+                if (value == null) value = "";
                 _Description = value.Trim();
             }
         }
