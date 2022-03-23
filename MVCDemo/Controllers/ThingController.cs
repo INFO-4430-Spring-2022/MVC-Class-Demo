@@ -23,7 +23,7 @@ namespace MVCDemo.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Thing tng) {
-            if (ModelState.IsValid) { 
+            if (ModelState.IsValid) { // this validates based off of Data Annotations.
                 if (tng.dbAdd() > 0 ) {
                     // added
                     return RedirectToAction(nameof(Index));
@@ -45,8 +45,7 @@ namespace MVCDemo.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Thing tng) {
-            try {
-
+            if (ModelState.IsValid) { // this validates based off of Data Annotations.
                 int rowsChanged  = tng.dbUpdate(); // 1 on success - 1 on errors ; 0 oops
                 if (rowsChanged > 0) {
                     // table updated 
@@ -55,8 +54,8 @@ namespace MVCDemo.Controllers {
                     // nothing updated 
                     return View(tng);
                 }
-            } catch {
-                return View();
+            } else { }
+                return View(tng);
             }
         }
 
