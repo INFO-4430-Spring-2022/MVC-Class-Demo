@@ -17,6 +17,16 @@ namespace MVCDemo.Controllers {
             return View("List", fDAL.GetPeople());
         }
 
+        public IActionResult CardList() {
+            return View(fDAL.GetPeople());
+        }
+
+        public IActionResult Card(int? id) {
+            if (id == null) id = 0;
+            Person p = fDAL.GetPerson((int)id);
+            return PartialView("_Card",p);
+        }
+
         //public List<Person> GetPeople() {
         //    List<Person> lst = new List<Person>();
         //    lst.Add(getBob());

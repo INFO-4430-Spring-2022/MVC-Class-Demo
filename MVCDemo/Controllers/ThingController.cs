@@ -54,7 +54,7 @@ namespace MVCDemo.Controllers {
                     // nothing updated 
                     return View(tng);
                 }
-            } else { }
+            } else { 
                 return View(tng);
             }
         }

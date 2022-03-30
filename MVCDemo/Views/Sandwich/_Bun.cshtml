@@ -1,0 +1,13 @@
+﻿@model bool?
+@{
+    string loc = "";
+    if (Model != null) {
+        if (Model == true) {
+            loc = "top";
+        } else {
+            loc = "bottom";
+        }
+    }
+}
+
+<div class="bun @loc"></div>

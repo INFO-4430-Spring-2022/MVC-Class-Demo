@@ -1,0 +1,12 @@
+﻿@model Person
+
+<div class="card">
+    @if (Model == null) {
+        <h1>No person found</h1>
+    }else{
+    <h1>@Model.FirstName @Model.LastName</h1>
+    <span>@Model.Email</span>
+    <p>@Model.Homepage</p>
+    <a href="#" class="card-link" >Details</a>
+    }
+</div>
