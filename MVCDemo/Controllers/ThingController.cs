@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MVCDemo.Models;
 
 namespace MVCDemo.Controllers {
@@ -16,7 +17,10 @@ namespace MVCDemo.Controllers {
 
         // GET: Thing/Create
         public ActionResult Create() {
-            return View(new Thing()); // Start with an empty object so that it has an ID for the form.
+            SelectList sList = new SelectList(
+                fDAL.GetThingTypes(),"ID", "Name");
+            ViewBag.ThingTypes = sList;
+            return View(); // new Thing() { TypeID = 3} ); // Start with an empty object so that it has an ID for the form.
         }
 
         // POST: Thing/Create
@@ -29,15 +33,24 @@ namespace MVCDemo.Controllers {
                     return RedirectToAction(nameof(Index));
                 } else {
                     // no add
+                    SelectList sList = new SelectList(
+                        fDAL.GetThingTypes(), "ID", "Name");
+                    ViewBag.ThingTypes = sList;
                     return View(tng);
                 }
             } else {
+                SelectList sList = new SelectList(
+                    fDAL.GetThingTypes(), "ID", "Name");
+                ViewBag.ThingTypes = sList;
                 return View();
             }
         }
 
         // GET: Thing/Edit/5
         public ActionResult Edit(int id) {
+            List<ThingType> types = fDAL.GetThingTypes();
+            SelectList sList = new SelectList(types,"ID", "Name");
+            ViewBag.ThingTypes = sList;
             return View(fDAL.GetThing(id));
         }
 
@@ -52,9 +65,15 @@ namespace MVCDemo.Controllers {
                     return RedirectToAction(nameof(Index));
                 } else {
                     // nothing updated 
+                    SelectList sList = new SelectList(
+    fDAL.GetThingTypes(), "ID", "Name");
+                    ViewBag.ThingTypes = sList;
                     return View(tng);
                 }
-            } else { 
+            } else {
+                SelectList sList = new SelectList(
+    fDAL.GetThingTypes(), "ID", "Name");
+                ViewBag.ThingTypes = sList;
                 return View(tng);
             }
         }

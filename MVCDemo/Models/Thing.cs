@@ -43,6 +43,7 @@ namespace MVCDemo.Models {
         /// Gets or sets the Name for this Thing object.
         /// </summary>
         /// <remarks></remarks>
+        [Required]
         public string Name {
             get {
                 return _Name;
