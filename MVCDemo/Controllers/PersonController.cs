@@ -4,10 +4,10 @@ using MVCDemo.Models;
 namespace MVCDemo.Controllers {
     public class PersonController : Controller {
 
-        private DAL _DAL;
+        //private DAL _DAL;
 
         public PersonController() {
-            _DAL = new DAL();
+            //_DAL = new DAL();
         }
 
 
@@ -15,6 +15,16 @@ namespace MVCDemo.Controllers {
             //ViewBag.Pizza = "Pepperoni";
             //ViewData["IceCream"] = "Chocolate";
             return View("List", fDAL.GetPeople());
+        }
+
+        public IActionResult CardList() {
+            return View(fDAL.GetPeople());
+        }
+
+        public IActionResult Card(int? id) {
+            if (id == null) id = 0;
+            Person p = fDAL.GetPerson((int)id);
+            return PartialView("_Card",p);
         }
 
         //public List<Person> GetPeople() {
@@ -28,44 +38,79 @@ namespace MVCDemo.Controllers {
         //}
 
 
-        public Person getBob() {
-            Person p = new Person();
-            p.FirstName = "Bob";
-            p.LastName = "Awesome";
-            p.Prefix = "Mr.";
-            p.Postfix = "Esquire";
-            p.Homepage = "http://www.iamawesome.com";
-            p.Phone = "5555551234";
-            p.Email = "bob@iamawesome.com";
-            return p;
-        }
+        //public Person getBob() {
+        //    Person p = new Person();
+        //    p.FirstName = "Bob";
+        //    p.LastName = "Awesome";
+        //    p.Prefix = "Mr.";
+        //    p.Postfix = "Esquire";
+        //    p.Homepage = "http://www.iamawesome.com";
+        //    p.Phone = "5555551234";
+        //    p.Email = "bob@iamawesome.com";
+        //    return p;
+        //}
 
-        public IActionResult Details() {
+        public IActionResult Details(int? id) {
             //TempData["Pizza"] = "Meat Lovers";
             //return RedirectToAction("Index");
 
-            Person bob = getBob();
-            ThingType tType = new ThingType();
-            tType.Name = "thing one";
+            //Person bob = getBob();
+            //ThingType tType = new ThingType();
+            //tType.Name = "thing one";
+            Person bob = fDAL.GetPerson(id != null ? (int)id : -1);
             return View("About", bob);
 
         }
+        public IActionResult Create() {
+            Person newP = new Person();
+            //newP.DateOfBirth = DateTime.Now;
+            //return View(newP);
+            return View(newP);
+        }
 
-        public IActionResult Delete() {
+        [HttpPost]
+        public IActionResult Create(Person per) {
+            // data checking
+            bool objectDataValid = true;
+            // do not need to do these if validation is done in the property setter. See Thing class.
+            per.Prefix = per.Prefix == null ? "" : per.Prefix;
+            per.Postfix = per.Postfix == null ? "" : per.Postfix;
+            per.Email = per.Email == null ? "" : per.Email;
+            per.Phone = per.Phone == null ? "" : per.Phone;
+            per.Homepage = per.Homepage == null ? "" : per.Homepage;
+            DateTime minDate = new DateTime(1900, 1, 1);
+            // cannot be born before 1900
+            per.DateOfBirth = per.DateOfBirth < minDate ? minDate : per.DateOfBirth;
+            // cannot be not be born yet.
+            per.DateOfBirth = per.DateOfBirth > DateTime.Now ? DateTime.Now : per.DateOfBirth;
 
-            Person bob = getBob();
-            return View(bob);
+            // data valid
+            if (objectDataValid) {
+                per.dbAdd();
+                if (per.ID > 0) {
+                    // successfully added to DB
+                    return RedirectToAction("Index");
+                } else {
+                    // error; send back to form
+                    return View(per);
+                }
+            } else {
+                // data was not valid; redirect back to form.
+                return View(per);
+            }
         }
 
         [HttpGet]
         public IActionResult Edit(int? id) {
             Person p;
             if (id != null) {
-                p = _DAL.GetPerson((int)id);
+                p = fDAL.GetPerson((int)id);
+               return View(p);
             } else {
-                p = new Person() { FirstName = "John", LastName = "Doe" };
+                //p = new Person() { FirstName = "John", LastName = "Doe" };
+                // no person requested; go back to list of people.
+                return RedirectToAction("Index");
             }
-            return View(p);
         }
 
         [HttpPost]
@@ -74,21 +119,65 @@ namespace MVCDemo.Controllers {
         public IActionResult Edit([FromRoute] int? id,
             Person per) {
             //[Bind("FirstName", "LastName", "Prefix", "HomePage")] Person per) {
+            // data checking
+            bool objectDataValid = true;
+            // do not need to do these if validation is done in the property setter. See Thing class.
+            per.Prefix = per.Prefix == null ? "" : per.Prefix;
+            per.Postfix = per.Postfix == null ? "" : per.Postfix;
+            per.Email = per.Email == null ? "" : per.Email;
+            per.Phone = per.Phone == null ? "" : per.Phone;
+            per.Homepage = per.Homepage == null ? "" : per.Homepage;
+            DateTime minDate = new DateTime(1900, 1, 1);
+            // cannot be born before 1900
+            per.DateOfBirth = per.DateOfBirth < minDate ? minDate : per.DateOfBirth;
+            // cannot be not be born yet.
+            per.DateOfBirth = per.DateOfBirth > DateTime.Now ? DateTime.Now : per.DateOfBirth;
 
-            _DAL.UpdatePerson(per);
-            if (true) {
-                // no errors
-                return RedirectToAction("Index");
+            // data valid
+            if (objectDataValid) {
+                int rowsChanged = per.dbUpdate();
+                if (rowsChanged == 1) {
+                    // successfully changed one row in DB
+                    return RedirectToAction("Index");
+                } else {
+                    // error; send back to form
+                    return View(per);
+                }
             } else {
-                // you had errors
+                // data was not valid; redirect back to form.
                 return View(per);
             }
         }
 
-        public IActionResult Create() {
-            Person newP = new Person();
-            newP.DateOfBirth = DateTime.Now;
-            return View(newP);
+        public IActionResult Delete(int? id) {
+
+            //Person bob = getBob();
+            Person bob = fDAL.GetPerson(id != null ? (int)id : -1);
+            return View(bob);
         }
+
+        [HttpPost]
+        public IActionResult Delete(int? id,string ok) {
+
+            //Person bob = getBob();
+            Person bob = fDAL.GetPerson(id != null ? (int)id : -1);
+            if (ok == "submitted") {
+                // form was submitted 
+                int rowsAffected = bob.dbRemove();
+                if (rowsAffected == 1) {
+                    // only one row deleted
+                    return RedirectToAction("Index");
+                } else {
+                    // oops something went wrong.
+                return View(bob);
+                }
+            } else {
+                // not send from correct view
+                return View(bob);
+            }
+            
+
+        }
+
     }
 }

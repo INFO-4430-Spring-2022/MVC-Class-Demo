@@ -43,11 +43,13 @@ namespace MVCDemo.Models {
         /// Gets or sets the Name for this Thing object.
         /// </summary>
         /// <remarks></remarks>
+        [Required]
         public string Name {
             get {
                 return _Name;
             }
             set {
+                if (value == null) value = "";
                 _Name = value.Trim();
             }
         }
@@ -61,6 +63,7 @@ namespace MVCDemo.Models {
                 return _Description;
             }
             set {
+                if (value == null) value = "";
                 _Description = value.Trim();
             }
         }

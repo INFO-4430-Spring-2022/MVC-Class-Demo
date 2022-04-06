@@ -17,7 +17,8 @@
                 <input asp-for="ID" class="form-control" />
                 <span asp-validation-for="ID" class="text-danger"></span>
             </div>*@
-            @Html.HiddenFor(fieldModel => Model.ID )
+            @*<input type="hidden" asp-for="ID" />*@ @*Can be done this way.*@
+            @Html.HiddenFor(fieldModel => Model.ID ) @*or this way*@
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />

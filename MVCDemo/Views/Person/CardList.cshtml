@@ -1,0 +1,7 @@
+﻿@model List<Person>
+
+
+@foreach (Person p in Model) {
+    <partial name="_Card" model="p" />
+}
+
