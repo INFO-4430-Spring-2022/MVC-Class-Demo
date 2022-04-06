@@ -1,0 +1,8 @@
+﻿@model IEnumerable<ThingType>
+
+<ol>
+    @foreach (ThingType tt in Model)
+    {
+        <li data-id="@tt.ID" >@tt.Name</li>
+    }
+</ol>

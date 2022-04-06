@@ -22,3 +22,39 @@ function handleCardClick() {
         }
     });
 }
+
+var autocomplete = document.getElementById("txtTypeLookup");
+autocomplete.onkeyup = handleKeyUp;
+
+function handleKeyUp(evt) {
+    evt = evt || window.event;
+    var searchText = this.value;
+    $.ajax({
+        url: "../ThingType/List"
+        , data: { search: searchText }
+        , success: function (resp) {
+            // alert(resp);
+            var outer = document.getElementById("divOutput");
+            outer.innerHTML = resp;
+        }, error: function () {
+            alert("Oops");
+        }
+    });
+
+    //$.ajax({
+    //    url: "../ThingType/Find"
+    //    , data: {id: 1}
+    //    , success: function (resp) {
+    //        alert(resp);
+    //        if (resp.success) {
+    //            //alert("worked");
+    //            var outer = document.getElementById("divOutput");
+    //            outer.innerHTML = resp.data.firstName;
+    //        } else {    
+    //            //was an error
+    //        }
+    //    }, error: function () {
+    //        alert("Oops");
+    //    }
+    //});
+}

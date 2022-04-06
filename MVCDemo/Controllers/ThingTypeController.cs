@@ -127,6 +127,34 @@ namespace MVCDemo.Controllers {
 
         }
 
+        #region AJAX
+
+        public IActionResult Find(int? id) {
+            Person p = null;
+            bool success = true;
+            if (id == null) {
+                success = false;
+            } else {
+            p = fDAL.GetPerson((int)id);
+            }
+            object toReturn = new { success = success, data = p, message = "Oops" };
+            return Json(toReturn);
+            //return View();
+        }
+
+        public IActionResult List(string search) {
+            search = search == null ? "" : search;
+            List<ThingType> types = fDAL.GetThingTypes();
+            List<ThingType> found = new List<ThingType>();
+            search = search.ToLower();
+            foreach (ThingType t in types) {
+                if (t.Name.ToLower().Contains(search))
+                    found.Add(t);
+            }
+            return PartialView("_SelectList",found);
+        }
+
+        #endregion
 
     }
 }

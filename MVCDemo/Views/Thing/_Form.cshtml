@@ -20,7 +20,10 @@
                     <option value="@tType.ID" >@tType.Name</option>
                 }
             </select>*@
-                <select asp-for="TypeID" asp-items="ViewBag.ThingTypes" ></select>
+                @*<select asp-for="TypeID" asp-items="ViewBag.ThingTypes" ></select>*@
+                <input type="text" id="txtTypeLookup" />
+                <input type="text" asp-for="TypeID" />
+                <div id="divOutput"></div>
               <span asp-validation-for="TypeID" class="text-danger"></span>
 
             </div>
