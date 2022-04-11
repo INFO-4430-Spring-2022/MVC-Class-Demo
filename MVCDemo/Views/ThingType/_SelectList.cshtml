@@ -1,8 +1,12 @@
 ﻿@model IEnumerable<ThingType>
 
 <ol>
-    @foreach (ThingType tt in Model)
-    {
-        <li data-id="@tt.ID" >@tt.Name</li>
+    @if (ViewBag.Success) {
+        @foreach (ThingType tt in Model) {
+            <li data-id="@tt.ID" >@tt.Name | @tt.ID</li>
+        }
+
+    } else {
+            <li>No data returned</li>
     }
 </ol>

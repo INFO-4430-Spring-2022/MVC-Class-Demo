@@ -151,6 +151,7 @@ namespace MVCDemo.Controllers {
                 if (t.Name.ToLower().Contains(search))
                     found.Add(t);
             }
+            ViewBag.Success = true;
             return PartialView("_SelectList",found);
         }
 

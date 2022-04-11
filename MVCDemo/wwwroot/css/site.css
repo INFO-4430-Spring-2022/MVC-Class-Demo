@@ -16,3 +16,20 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.dropdown-picker{
+    border: 1px solid #AAA;
+}
+
+.dropdown-picker ol {
+    list-style: none;
+    padding: 0;
+}
+    .dropdown-picker li{
+        padding: .3em;
+    }
+
+.dropdown-picker li:hover {
+    background-color: #AAA;
+    padding: .3em;
+}

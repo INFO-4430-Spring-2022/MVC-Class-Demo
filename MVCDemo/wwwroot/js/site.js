@@ -58,3 +58,18 @@ function handleKeyUp(evt) {
     //    }
     //});
 }
+
+document.getElementById("divOutput").onclick = autoSelects;
+
+function autoSelects(evt) {
+    evt = evt || window.event;
+
+    var eleClicked = evt.target || evt.srcElement;
+    var idOfObject = eleClicked.getAttribute("data-id");
+    //alert(eleClicked.innerText + " " + idOfObject + " was clicked");
+    var actualValue = document.getElementById("TypeID");
+    actualValue.value = idOfObject;
+    //alert( eleClicked.tagName +  " was clicked");
+    //alert( this.tagName +  " was clicked");
+
+}
