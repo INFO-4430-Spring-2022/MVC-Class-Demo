@@ -30,7 +30,31 @@ CREATE TABLE dbo.PeopleThings(
 	,CONSTRAINT PK_PeopleThings PRIMARY KEY(PersonID,ThingID)
 )
 
+CREATE TABLE dbo.Roles(
+	RoleID int IDENTITY(1,1) PRIMARY KEY
+	,Name nvarchar(50) NOT NULL
+	,IsAdmin bit NOT NULL
+	,CanViewPerson bit NOT NULL
+	,CanAddPerson bit NOT NULL
+	,CanEditPerson bit NOT NULL
+	,CanViewThing bit NOT NULL
+	,CanAddThing bit NOT NULL
+	,CanEditThing bit NOT NULL
+	,CanViewThingType bit NOT NULL
+	,CanAddThingType bit NOT NULL
+	,CanEditThingType bit NOT NULL
+	,CanViewUser bit NOT NULL
+	,CanAddUser bit NOT NULL
+	,CanEditUser bit NOT NULL
+	)
 
+CREATE TABLE dbo.Users(
+	UserID int IDENTITY(1,1) PRIMARY KEY
+	,UserName nvarchar(75) NOT NULL
+	,Password nvarchar(50) NOT NULL
+	,Email nvarchar(200) NOT NULL
+	,RoleID int REFERENCES Roles(RoleID)
+	)
 
 
 -- https://generatedata.com/ 
@@ -91,3 +115,46 @@ INSERT INTO dbo.PeopleThings VALUES
 			,(8,3)
 
 GO
+
+-- Add Users and Permissions
+
+SET IDENTITY_INSERT dbo.Roles ON
+
+INSERT INTO Roles (RoleID,Name,IsAdmin ,
+	CanViewPerson ,CanAddPerson ,CanEditPerson ,
+	CanViewThing ,CanAddThing ,CanEditThing ,
+	CanViewThingType ,CanAddThingType ,CanEditThingType ,
+	CanViewUser ,CanAddUser ,CanEditUser)
+	VALUES
+		(1, 'Admin', 1,
+		1,1,1,
+		1,1,1,
+		1,1,1,
+		1,1,1)
+		,(2, 'Power User', 0,
+		1,1,1,
+		1,1,1,
+		1,1,1,
+		1,1,1)
+		,(3, 'User', 0,
+		1,1,0,
+		1,1,0,
+		1,1,0,
+		1,1,0)
+		,(4, 'Guest', 0,
+		1,0,0,
+		1,0,0,
+		1,0,0,
+		1,0,0)
+
+SET IDENTITY_INSERT dbo.Roles OFF
+
+INSERT INTO Users (UserName,Password,Email,RoleID)
+	VALUES
+		('bob','12345trgsfds','bob@isu.edu',1)
+		,('sally','12345trgsfds','sally@isu.edu',2)
+		,('asim','12345trgsfds','asim@isu.edu',3)
+		,('ben','12345trgsfds','benjamin@isu.edu',4)
+		,('alex','12345trgsfds','alexandria@isu.edu',4)
+		,('jose','12345trgsfds','jose.torez@isu.edu',4)
+		,('bobby','12345trgsfds','robert@isu.edu',4)

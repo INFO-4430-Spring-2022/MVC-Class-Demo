@@ -45,6 +45,7 @@ namespace MVCDemo.Models {
         }
 
 
+
         internal static int AddObject(SqlCommand comm, string parameterName) {
             int retInt = 0;
             try {
@@ -95,7 +96,6 @@ namespace MVCDemo.Models {
             }
             return retInt;
         }
-
         private static void DisplayException(Exception ex) {
             System.Diagnostics.Debug.WriteLine(ex.Message);
             System.Diagnostics.Debug.WriteLine(ex.StackTrace);
@@ -111,6 +111,8 @@ namespace MVCDemo.Models {
             ret.Fill(dr);
             return ret;
         }
+
+  
 
         #endregion
 
@@ -568,6 +570,35 @@ namespace MVCDemo.Models {
         }
 
 
+
+        #endregion
+
+        #region Users and Roles
+
+
+        internal static int AddUser(User user) {
+            throw new NotImplementedException();
+        }
+
+        internal static int RemoveUser(User user) {
+            throw new NotImplementedException();
+        }
+
+        internal static int UpdateUser(User user) {
+            throw new NotImplementedException();
+        }
+
+        internal static int AddRole(Role role) {
+            throw new NotImplementedException();
+        }
+
+
+        internal static int UpdateRole(Role role) {
+            throw new NotImplementedException();
+        }
+        internal static int RemoveRole(Role role) {
+            throw new NotImplementedException();
+        }
 
         #endregion
 
