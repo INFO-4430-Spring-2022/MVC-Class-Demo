@@ -575,6 +575,74 @@ namespace MVCDemo.Models {
 
         #region Users and Roles
 
+        /// <summary>
+        /// Gets the User correposponding with the given ID
+        /// </summary>
+        /// <remarks></remarks>
+
+        public static User GetUser(String idstring, Boolean retNewObject) {
+            User retObject = null;
+            int ID;
+            if (int.TryParse(idstring, out ID)) {
+                if (ID == -1 && retNewObject) {
+                    retObject = new User();
+                    retObject.ID = -1;
+                } else if (ID >= 0) {
+                    retObject = GetUser(ID);
+                }
+            }
+            return retObject;
+        }
+
+
+        /// <summary>
+        /// Gets the Usercorresponding with the given ID
+        /// </summary>
+        /// <remarks></remarks>
+
+        public static User GetUser(int id) {
+            SqlCommand comm = new SqlCommand("sprocUserGet");
+            User retObj = null;
+            try {
+                comm.Parameters.AddWithValue("@" + User.db_ID, id);
+                SqlDataReader dr = GetDataReader(comm);
+                while (dr.Read()) {
+                    retObj = new User(dr);
+                }
+            } catch (Exception ex) {
+                DisplayException(ex);
+            } finally {
+                if (comm != null && comm.Connection != null) {
+                    comm.Connection.Close();
+                }
+            }
+            return retObj;
+        }
+
+
+        /// <summary>
+        /// Gets a list of all User objects from the database.
+        /// </summary>
+        /// <remarks></remarks>
+        public static List<User> GetUsers() {
+            SqlCommand comm = new SqlCommand("sprocUsersGetAll");
+            List<User> retList = new List<User>();
+            try {
+                SqlDataReader dr = GetDataReader(comm);
+                while (dr.Read()) {
+                    retList.Add(new User(dr));
+                }
+            } catch (Exception ex) {
+                DisplayException(ex);
+            } finally {
+                if (comm != null && comm.Connection != null) {
+                    comm.Connection.Close();
+                }
+            }
+            return retList;
+        }
+
+
 
         internal static int AddUser(User user) {
             throw new NotImplementedException();
@@ -588,10 +656,80 @@ namespace MVCDemo.Models {
             throw new NotImplementedException();
         }
 
+
+
+
+        /// <summary>
+        /// Gets the Role correposponding with the given ID
+        /// </summary>
+        /// <remarks></remarks>
+
+        public static Role GetRole(String idstring, Boolean retNewObject) {
+            Role retObject = null;
+            int ID;
+            if (int.TryParse(idstring, out ID)) {
+                if (ID == -1 && retNewObject) {
+                    retObject = new Role();
+                    retObject.ID = -1;
+                } else if (ID >= 0) {
+                    retObject = GetRole(ID);
+                }
+            }
+            return retObject;
+        }
+
+
+        /// <summary>
+        /// Gets the Rolecorresponding with the given ID
+        /// </summary>
+        /// <remarks></remarks>
+
+        public static Role GetRole(int id) {
+            SqlCommand comm = new SqlCommand("sprocRoleGet");
+            Role retObj = null;
+            try {
+                comm.Parameters.AddWithValue("@" + Role.db_ID, id);
+                SqlDataReader dr = GetDataReader(comm);
+                while (dr.Read()) {
+                    retObj = new Role(dr);
+                }
+            } catch (Exception ex) {
+                DisplayException(ex);
+            } finally {
+                if (comm != null && comm.Connection != null) {
+                    comm.Connection.Close();
+                }
+            }
+            return retObj;
+        }
+
+
+        /// <summary>
+        /// Gets a list of all Role objects from the database.
+        /// </summary>
+        /// <remarks></remarks>
+        public static List<Role> GetRoles() {
+            SqlCommand comm = new SqlCommand("sprocRolesGetAll");
+            List<Role> retList = new List<Role>();
+            try {
+                SqlDataReader dr = GetDataReader(comm);
+                while (dr.Read()) {
+                    retList.Add(new Role(dr));
+                }
+            } catch (Exception ex) {
+                DisplayException(ex);
+            } finally {
+                if (comm != null && comm.Connection != null) {
+                    comm.Connection.Close();
+                }
+            }
+            return retList;
+        }
+
+
         internal static int AddRole(Role role) {
             throw new NotImplementedException();
         }
-
 
         internal static int UpdateRole(Role role) {
             throw new NotImplementedException();

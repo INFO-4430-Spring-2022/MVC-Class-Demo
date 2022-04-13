@@ -3,26 +3,26 @@
 namespace MVCDemo.Models {
     public class Role : DatabaseRecord {
         #region Database String
-        internal const string db_ID = "RoleID];
-        internal const string db_Name = "Name];
-        internal const string db_IsAdmin = "IsAdmin];
-        internal const string db_CanViewRole = "CanViewRole];
+        internal const string db_ID = "RoleID";
+        internal const string db_Name = "Name";
+        internal const string db_IsAdmin = "IsAdmin";
+        internal const string db_CanViewRole = "CanViewRole";
 
-        internal const string db_CanAddRole = "CanAddRole];
-        internal const string db_CanEditRole = "CanEditRole];
+        internal const string db_CanAddRole = "CanAddRole";
+        internal const string db_CanEditRole = "CanEditRole";
 
-        internal const string db_CanViewThing = "CanViewThing];
-        internal const string db_CanAddThing = "CanAddThing];
+        internal const string db_CanViewThing = "CanViewThing";
+        internal const string db_CanAddThing = "CanAddThing";
 
-        internal const string db_CanEditThing = "CanEditThing];
-        internal const string db_CanViewThingType = "CanViewThingType];
+        internal const string db_CanEditThing = "CanEditThing";
+        internal const string db_CanViewThingType = "CanViewThingType";
 
-        internal const string db_CanAddThingType = "CanAddThingType];
-        internal const string db_CanEditThingType = "CanEditThingType];
+        internal const string db_CanAddThingType = "CanAddThingType";
+        internal const string db_CanEditThingType = "CanEditThingType";
 
-        internal const string db_CanViewUser = "CanViewUser];
-        internal const string db_CanAddUser = "CanAddUser];
-        internal const string db_CanEditUser = "CanEditUser];
+        internal const string db_CanViewUser = "CanViewUser";
+        internal const string db_CanAddUser = "CanAddUser";
+        internal const string db_CanEditUser = "CanEditUser";
 
         #endregion
         #region Private Variables
@@ -78,6 +78,7 @@ namespace MVCDemo.Models {
         public bool CanEditUser {
             get { return _CanEditUser; }
             set { _CanEditUser = value; }
+        }
 
         #endregion
 

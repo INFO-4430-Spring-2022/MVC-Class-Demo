@@ -405,3 +405,114 @@ GO
 -- GO 
 
 
+---- Users 
+
+
+-- =============================================
+-- Author:		Jon Holmes
+-- Create date:	14 Mar 2022
+-- Description:	Retrieve specific User from the database.
+-- =============================================
+CREATE PROCEDURE dbo.sprocUserGet
+@UserID int
+AS
+BEGIN
+     -- SET NOCOUNT ON added to prevent extra result sets from
+     -- interfering with SELECT statements.
+     SET NOCOUNT ON;
+
+     SELECT * FROM Users
+     WHERE UserID = @UserID
+END
+GO
+
+-- GRANT EXECUTE ON dbo.sprocUserGet TO db_reader
+-- GO 
+
+
+-- =============================================
+-- Author:		Jon Holmes
+-- Create date:	14 Mar 2022
+-- Description:	Retrieve specific User from the database.
+-- =============================================
+CREATE PROCEDURE dbo.sprocUserGetByUserName
+@UserName nvarchar(75)
+AS
+BEGIN
+     -- SET NOCOUNT ON added to prevent extra result sets from
+     -- interfering with SELECT statements.
+     SET NOCOUNT ON;
+
+     SELECT * FROM Users
+     WHERE UserName = @UserName
+END
+GO
+
+-- GRANT EXECUTE ON dbo.sprocUserGetByUserName TO db_reader
+-- GO 
+
+
+-- =============================================
+-- Author:		Jon Holmes
+-- Create date:	14 Mar 2022
+-- Description:	Retrieve all Users from the database.
+-- =============================================
+CREATE PROCEDURE dbo.sprocUsersGetAll
+AS
+BEGIN
+     -- SET NOCOUNT ON added to prevent extra result sets from
+     -- interfering with SELECT statements.
+     SET NOCOUNT ON;
+
+     SELECT * FROM Users
+END
+GO
+
+-- GRANT EXECUTE ON dbo.sprocUsersGetAll TO db_reader
+-- GO 
+
+
+---- Roles 
+
+
+-- =============================================
+-- Author:		Jon Holmes
+-- Create date:	14 Mar 2022
+-- Description:	Retrieve specific Role from the database.
+-- =============================================
+CREATE PROCEDURE dbo.sprocRoleGet
+@RoleID int
+AS
+BEGIN
+     -- SET NOCOUNT ON added to prevent extra result sets from
+     -- interfering with SELECT statements.
+     SET NOCOUNT ON;
+
+     SELECT * FROM Roles
+     WHERE RoleID = @RoleID
+END
+GO
+
+-- GRANT EXECUTE ON dbo.sprocRoleGet TO db_reader
+-- GO 
+
+
+-- =============================================
+-- Author:		Jon Holmes
+-- Create date:	14 Mar 2022
+-- Description:	Retrieve all Roles from the database.
+-- =============================================
+CREATE PROCEDURE dbo.sprocRolesGetAll
+AS
+BEGIN
+     -- SET NOCOUNT ON added to prevent extra result sets from
+     -- interfering with SELECT statements.
+     SET NOCOUNT ON;
+
+     SELECT * FROM Roles
+END
+GO
+
+-- GRANT EXECUTE ON dbo.sprocRolesGetAll TO db_reader
+-- GO 
+
