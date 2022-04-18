@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 namespace Tools {
     public static class Hasher {
 
-        internal static string HashIt(string input) {
+        public static string HashIt(string input) {
             string hash = input;
             // create parts to hash
             byte[] hashParts = System.Text.Encoding.UTF8.GetBytes(hash);
@@ -16,7 +16,7 @@ namespace Tools {
             return hashedString;
         }
 
-        internal static string HashIt(string input, string salt, int stretches) {
+        public static string HashIt(string input, string salt, int stretches) {
             // add data (salt) to input
             string hashWithSalt = input + salt;
             string strongerHash = hashWithSalt;

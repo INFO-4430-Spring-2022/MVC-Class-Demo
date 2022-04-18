@@ -621,6 +621,31 @@ namespace MVCDemo.Models {
 
 
         /// <summary>
+        /// Gets the Usercorresponding with the given ID
+        /// </summary>
+        /// <remarks></remarks>
+
+        public static User GetUser(string username) {
+            SqlCommand comm = new SqlCommand("sprocUserGetByUserName");
+            User retObj = null;
+            try {
+                comm.Parameters.AddWithValue("@" + User.db_UserName, username);
+                SqlDataReader dr = GetDataReader(comm);
+                while (dr.Read()) {
+                    retObj = new User(dr);
+                }
+            } catch (Exception ex) {
+                DisplayException(ex);
+            } finally {
+                if (comm != null && comm.Connection != null) {
+                    comm.Connection.Close();
+                }
+            }
+            return retObj;
+        }
+
+
+        /// <summary>
         /// Gets a list of all User objects from the database.
         /// </summary>
         /// <remarks></remarks>

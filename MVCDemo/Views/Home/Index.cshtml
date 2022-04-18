@@ -16,3 +16,55 @@
 <a asp-action="Types" >Thing Types</a>
 <a asp-action="MakeMe" >Create Person</a>
 <a asp-controller="Person" >Person Index</a>
+
+<div>
+    user: Bob
+    pass: tester
+    @{
+        string pass = "tester";
+    }
+</div>
+<dl>
+        <dt>plain</dt>
+        <dd>@pass</dd>
+        <dt>hashed</dt>
+        <dd>@Tools.Hasher.HashIt(pass)</dd>
+        <dt>hashed,s,s</dt>
+        <dd>@Tools.Hasher.HashIt(pass,"aaaa",10)</dd>
+        <dt>right</dt>
+        <dd>@Tools.Hasher.HashIt(pass,"aaaa",100000,44)</dd>
+
+    </dl>
+    <table>
+        <tr>
+            <th>Salt</th>
+            <th>Password</th>
+        </tr>
+        <tr>
+            @{string salt = "aaaa";}
+            <td>@salt</td>
+            <td>@Tools.Hasher.HashIt(pass,salt,100000,48)</td>
+        </tr>
+        <tr>
+            @{salt = "bbbb";}
+            <td>@salt</td>
+            <td>@Tools.Hasher.HashIt(pass,salt,100000,48)</td>
+        </tr>
+                <tr>
+            @{salt = "cccc";}
+            <td>@salt</td>
+            <td>@Tools.Hasher.HashIt(pass,salt,100000,48)</td>
+        </tr>
+                <tr>
+            @{salt = "aaaaaaaa";}
+            <td>@salt</td>
+            <td>@Tools.Hasher.HashIt(pass,salt,100000,48)</td>
+        </tr>
+                <tr>
+            @{salt = "dddd";}
+            <td>@salt</td>
+            <td>@Tools.Hasher.HashIt(pass,salt,100000,48)</td>
+        </tr>
+</table>
+
+

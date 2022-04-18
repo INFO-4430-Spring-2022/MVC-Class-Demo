@@ -150,12 +150,12 @@ INSERT INTO Roles (RoleID,Name,IsAdmin ,
 
 SET IDENTITY_INSERT dbo.Roles OFF
 
-INSERT INTO Users (UserName,Password,Email,RoleID)
+INSERT INTO Users (UserName,Salt,Password,Email,RoleID)
 	VALUES
-		('bob','12345trgsfds','bob@isu.edu',1)
-		,('sally','12345trgsfds','sally@isu.edu',2)
-		,('asim','12345trgsfds','asim@isu.edu',3)
-		,('ben','12345trgsfds','benjamin@isu.edu',4)
-		,('alex','12345trgsfds','alexandria@isu.edu',4)
-		,('jose','12345trgsfds','jose.torez@isu.edu',4)
-		,('bobby','12345trgsfds','robert@isu.edu',4)
+		('bob','aaaa','myONWJ0W6xG3BjVla2FoLVqNgHEnPf6zygYUT05Fvz14okuz1qScIDUIuIPu0qO1','bob@isu.edu',1)
+		,('sally','bbbb','B0zzR++6SIPSxVGrrebfkVdmiZHYpx0XfB/lJUR1ABshc+DIG43q7n/JxTP2k9Bw','sally@isu.edu',2)
+		,('asim','cccc','JlUP6gZ6OXc5xpoeOWern0oJY/OH3M8iR9EJ0PVu2eatsgZL/J+/1wz0QmrIK2vC','asim@isu.edu',3)
+		,('ben','aaaaaaaa','VB1oQvwAI4GNymlTdJqYOG6cQU0MwuKtjHllNiye/SubiGnLem4AKFKMEX6fPSsL','benjamin@isu.edu',4)
+		,('alex','dddd','ieFY9mfWqLRoRmRguSNKjlNX4uW+IkZA0QPiAU/zCtESJ5AsCsj59mT37n31C2Im','alexandria@isu.edu',4)
+		,('jose','aaaa','12345trgsfds','jose.torez@isu.edu',4)
+		,('bobby','aaaa','12345trgsfds','robert@isu.edu',4)
