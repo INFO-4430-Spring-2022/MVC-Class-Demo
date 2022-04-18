@@ -51,10 +51,11 @@ CREATE TABLE dbo.Roles(
 CREATE TABLE dbo.Users(
 	UserID int IDENTITY(1,1) PRIMARY KEY
 	,UserName nvarchar(75) NOT NULL
-	,Password nvarchar(50) NOT NULL
+	,Password char(64) NOT NULL  -- 48 bytes -> base 64 = 64 ASCII characters
+	,Salt char(24) NOT NULL -- 18 bytes -> base 64 = 24 ASCII characters
 	,Email nvarchar(200) NOT NULL
 	,RoleID int REFERENCES Roles(RoleID)
-	)
+)
 
 
 -- https://generatedata.com/ 
