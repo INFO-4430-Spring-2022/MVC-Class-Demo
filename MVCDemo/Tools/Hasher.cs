@@ -40,10 +40,8 @@ namespace Tools {
         }
 
         public static string GetSalt() {
-            string newSalt;
             byte[] saltArray = new byte[144 / 8]; // 144 bit salt (8 bits : 1 Byte) 
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            rng.GetNonZeroBytes(saltArray); // fill salt array with random bits.
+            saltArray = RandomNumberGenerator.GetBytes(144/8); // fill salt array with random bits.
             return Convert.ToBase64String(saltArray); // 144 bits -> 18 bytes -> 24 chars
         }
     }

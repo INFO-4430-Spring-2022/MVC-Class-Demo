@@ -5,6 +5,7 @@ namespace MVCDemo.Models {
         #region Database String
         internal const string db_ID = "UserID";
         internal const string db_UserName = "UserName";
+        internal const string db_Salt = "Salt";
         internal const string db_Password = "Password";
         internal const string db_Email = "Email";
         internal const string db_Role = "RoleID";
@@ -12,6 +13,7 @@ namespace MVCDemo.Models {
         #endregion
         #region Private Variables
         private string _UserName;
+        private string _Salt;
         private string _Password;
         private string _Email;
         private int _RoleID;
@@ -37,12 +39,18 @@ namespace MVCDemo.Models {
             set { _UserName = value; }
         }
 
+        [Display(Name = "Salt")]
+        public string Salt {
+            get { return _Salt; }
+            set { _Salt = value; }
+        }
+
         [Display(Name = "Password")]
         public string Password {
             get { return _Password; }
             set { _Password = value; }
         }
-                
+
         [Display(Name = "Email Address")]
         [DataType(DataType.EmailAddress)]
         public string Email {
@@ -95,6 +103,7 @@ namespace MVCDemo.Models {
         public override void Fill(Microsoft.Data.SqlClient.SqlDataReader dr) {
             _ID = (int)dr[db_ID];
             _UserName = (string)dr[db_UserName];
+            _Salt = (string)dr[db_Salt];
             _Password = (string)dr[db_Password];
             _Email = (string)dr[db_Email];
             _RoleID = (int)dr[db_Role];
