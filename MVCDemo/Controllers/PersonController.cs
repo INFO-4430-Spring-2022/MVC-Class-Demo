@@ -1,20 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using MVCDemo.Models;
 
 namespace MVCDemo.Controllers {
     public class PersonController : Controller {
 
         //private DAL _DAL;
+        private User _CurrentUser = null;
 
         public PersonController() {
             //_DAL = new DAL();
         }
 
+        public override void OnActionExecuting(ActionExecutingContext context) {
+            base.OnActionExecuting(context);
+            _CurrentUser = UserController.GetLoggedInUser(Request);
+            ViewBag.CurrentUser = _CurrentUser;
+        }
 
-        public IActionResult Index() {
+        public IActionResult Index(int page = 1, int count = 5) {
             //ViewBag.Pizza = "Pepperoni";
             //ViewData["IceCream"] = "Chocolate";
-            return View("List", fDAL.GetPeople());
+            List<Person> peopleToShow = new List<Person>();
+            peopleToShow = fDAL.GetPeople().Skip((page-1) * count).Take(count).ToList();
+            return View("List", peopleToShow);
         }
 
         public IActionResult CardList() {
@@ -102,13 +111,19 @@ namespace MVCDemo.Controllers {
 
         [HttpGet]
         public IActionResult Edit(int? id) {
-            Person p;
-            if (id != null) {
-                p = fDAL.GetPerson((int)id);
-               return View(p);
+            User currentUser = UserController.GetLoggedInUser(Request);
+            Role myRole = currentUser != null ? fDAL.GetRole(currentUser.RoleID) : new Role();
+            if (myRole.CanEditPerson) {
+                Person p;
+                if (id != null) {
+                    p = fDAL.GetPerson((int)id);
+                    return View(p);
+                } else {
+                    //p = new Person() { FirstName = "John", LastName = "Doe" };
+                    // no person requested; go back to list of people.
+                    return RedirectToAction("Index");
+                }
             } else {
-                //p = new Person() { FirstName = "John", LastName = "Doe" };
-                // no person requested; go back to list of people.
                 return RedirectToAction("Index");
             }
         }
@@ -120,32 +135,39 @@ namespace MVCDemo.Controllers {
             Person per) {
             //[Bind("FirstName", "LastName", "Prefix", "HomePage")] Person per) {
             // data checking
-            bool objectDataValid = true;
-            // do not need to do these if validation is done in the property setter. See Thing class.
-            per.Prefix = per.Prefix == null ? "" : per.Prefix;
-            per.Postfix = per.Postfix == null ? "" : per.Postfix;
-            per.Email = per.Email == null ? "" : per.Email;
-            per.Phone = per.Phone == null ? "" : per.Phone;
-            per.Homepage = per.Homepage == null ? "" : per.Homepage;
-            DateTime minDate = new DateTime(1900, 1, 1);
-            // cannot be born before 1900
-            per.DateOfBirth = per.DateOfBirth < minDate ? minDate : per.DateOfBirth;
-            // cannot be not be born yet.
-            per.DateOfBirth = per.DateOfBirth > DateTime.Now ? DateTime.Now : per.DateOfBirth;
+            User currentUser = UserController.GetLoggedInUser(Request);
+            Role myRole = currentUser != null ? fDAL.GetRole(currentUser.RoleID) : new Role();
+            if (myRole.CanEditPerson) {
+                bool objectDataValid = true;
+                // do not need to do these if validation is done in the property setter. See Thing class.
+                per.Prefix = per.Prefix == null ? "" : per.Prefix;
+                per.Postfix = per.Postfix == null ? "" : per.Postfix;
+                per.Email = per.Email == null ? "" : per.Email;
+                per.Phone = per.Phone == null ? "" : per.Phone;
+                per.Homepage = per.Homepage == null ? "" : per.Homepage;
+                DateTime minDate = new DateTime(1900, 1, 1);
+                // cannot be born before 1900
+                per.DateOfBirth = per.DateOfBirth < minDate ? minDate : per.DateOfBirth;
+                // cannot be not be born yet.
+                per.DateOfBirth = per.DateOfBirth > DateTime.Now ? DateTime.Now : per.DateOfBirth;
 
-            // data valid
-            if (objectDataValid) {
-                int rowsChanged = per.dbUpdate();
-                if (rowsChanged == 1) {
-                    // successfully changed one row in DB
-                    return RedirectToAction("Index");
+                // data valid
+                if (objectDataValid) {
+                    int rowsChanged = per.dbUpdate();
+                    if (rowsChanged == 1) {
+                        // successfully changed one row in DB
+                        return RedirectToAction("Index");
+                    } else {
+                        // error; send back to form
+                        return View(per);
+                    }
                 } else {
-                    // error; send back to form
+                    // data was not valid; redirect back to form.
                     return View(per);
                 }
             } else {
-                // data was not valid; redirect back to form.
-                return View(per);
+                // no perms
+                return RedirectToAction("Index");
             }
         }
 

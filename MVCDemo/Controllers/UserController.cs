@@ -36,9 +36,8 @@ namespace MVCDemo.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private IActionResult LoggedIn() {
-            User logged = GetLoggedInUser();
-
+        public IActionResult LoggedIn() {
+            User logged = GetLoggedInUser(Request);
             return View(logged);
         }
 
@@ -46,19 +45,19 @@ namespace MVCDemo.Controllers
         /// Get user that is currently logged in using cookie data.
         /// </summary>
         /// <returns></returns>
-        public User GetLoggedInUser() {
+        public static User GetLoggedInUser(HttpRequest req) {
             User loggedUser = null;
             string uCookieData = "";
             // get user cookie. Should contain encrypted user ID.
-            Request.Cookies.TryGetValue(_UserData, out uCookieData);
-            if (String.IsNullOrEmpty(uCookieData)) {
+            req.Cookies.TryGetValue(_UserData, out uCookieData);
+            if (!String.IsNullOrEmpty(uCookieData)) {
                 // have data; get userID.
                 int userID;
                 string encryptedUserID = Tools.DataEncryptor.Unprotect(uCookieData);
                 int.TryParse(encryptedUserID, out userID);
                 if (userID > 0) { // valid ID.
                     // get user
-                    loggedUser = fDAL.GetUser(userID); 
+                    loggedUser = fDAL.GetUser(userID);
                 }
             }
 

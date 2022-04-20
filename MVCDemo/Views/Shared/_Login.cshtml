@@ -1,17 +1,21 @@
-﻿
+﻿@if (ViewBag.CurrentUser != null) {
+    <span>Hello, @ViewBag.CurrentUser.UserName</span>
+    <a asp-action="Logout" asp-controller="User">Logout</a>
+} else {
+    <form asp-controller="User" asp-action="Login"
+      method="post" id="frmLogin">
+        <ul class="form-list">
+            <li>
+                <label>UserName:</label>
+                <input type="text" name="username" />
+            </li>
+            <li>
+                <label>Password:</label>
+                <input type="password" name="password" />
+            </li>
+            <li>Remember me <input type="checkbox" id="chkRememberMe" /> </li>            
+            <li><input type="submit" value="Login" /></li>
+        </ul>
 
-<form asp-controller="User" asp-action="Login"
-      method="post">
-    <ul>
-        <li>
-            <label>UserName:</label>
-            <input type="text" name="username" />
-        </li>
-        <li>
-            <label>Password:</label>
-            <input type="password" name="password" />
-        </li>
-        <li><input type="submit" value="Login" /></li>
-    </ul>
-
-</form>
+    </form>
+}

@@ -15,6 +15,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #AFA
 }
 
 .dropdown-picker{
@@ -33,3 +34,24 @@ body {
     background-color: #AAA;
     padding: .3em;
 }
+
+#divLoginPanel{
+    border: 2px solid #F0F;
+    background-color: #FFF;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.form-list{
+    border: 1px solid #0F0;
+    list-style: none;
+    padding: 0;
+    margin: .3em;
+}
+
+/*nav{
+    position:fixed !important;
+    top:0;
+    left: 0;
+}*/

@@ -24,42 +24,45 @@ function handleCardClick() {
 }
 
 var autocomplete = document.getElementById("txtTypeLookup");
-autocomplete.onkeyup = handleKeyUp;
+if (autocomplete !== null) {
+    autocomplete.onkeyup = handleKeyUp;
 
-function handleKeyUp(evt) {
-    evt = evt || window.event;
-    var searchText = this.value;
-    $.ajax({
-        url: "../ThingType/List"
-        , data: { search: searchText }
-        , success: function (resp) {
-            // alert(resp);
-            var outer = document.getElementById("divOutput");
-            outer.innerHTML = resp;
-        }, error: function () {
-            alert("Oops");
-        }
-    });
+    function handleKeyUp(evt) {
+        evt = evt || window.event;
+        var searchText = this.value;
+        $.ajax({
+            url: "../ThingType/List"
+            , data: { search: searchText }
+            , success: function (resp) {
+                // alert(resp);
+                var outer = document.getElementById("divOutput");
+                outer.innerHTML = resp;
+            }, error: function () {
+                alert("Oops");
+            }
+        });
 
-    //$.ajax({
-    //    url: "../ThingType/Find"
-    //    , data: {id: 1}
-    //    , success: function (resp) {
-    //        alert(resp);
-    //        if (resp.success) {
-    //            //alert("worked");
-    //            var outer = document.getElementById("divOutput");
-    //            outer.innerHTML = resp.data.firstName;
-    //        } else {    
-    //            //was an error
-    //        }
-    //    }, error: function () {
-    //        alert("Oops");
-    //    }
-    //});
+        //$.ajax({
+        //    url: "../ThingType/Find"
+        //    , data: {id: 1}
+        //    , success: function (resp) {
+        //        alert(resp);
+        //        if (resp.success) {
+        //            //alert("worked");
+        //            var outer = document.getElementById("divOutput");
+        //            outer.innerHTML = resp.data.firstName;
+        //        } else {    
+        //            //was an error
+        //        }
+        //    }, error: function () {
+        //        alert("Oops");
+        //    }
+        //});
+    }
 }
 
-document.getElementById("divOutput").onclick = autoSelects;
+var outputter = document.getElementById("divOutput");
+ if (outputter !== null ) outputter.onclick = autoSelects;
 
 function autoSelects(evt) {
     evt = evt || window.event;
@@ -72,4 +75,13 @@ function autoSelects(evt) {
     //alert( eleClicked.tagName +  " was clicked");
     //alert( this.tagName +  " was clicked");
 
+}
+
+var login = document.getElementById("frmLogin");
+alert(login);
+if (typeof login !== "undefined") {
+    // we have a login form.
+    login.addEventListener("submit", function () {
+        alert("form being submitted.");
+    });
 }

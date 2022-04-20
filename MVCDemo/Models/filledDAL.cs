@@ -705,7 +705,7 @@ namespace MVCDemo.Models {
 
 
         /// <summary>
-        /// Gets the Rolecorresponding with the given ID
+        /// Gets the Role corresponding with the given ID
         /// </summary>
         /// <remarks></remarks>
 

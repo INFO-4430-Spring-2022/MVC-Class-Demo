@@ -6,10 +6,10 @@ namespace MVCDemo.Models {
         internal const string db_ID = "RoleID";
         internal const string db_Name = "Name";
         internal const string db_IsAdmin = "IsAdmin";
-        internal const string db_CanViewRole = "CanViewRole";
+        internal const string db_CanViewPerson = "CanViewPerson";
 
-        internal const string db_CanAddRole = "CanAddRole";
-        internal const string db_CanEditRole = "CanEditRole";
+        internal const string db_CanAddPerson = "CanAddPerson";
+        internal const string db_CanEditPerson = "CanEditPerson";
 
         internal const string db_CanViewThing = "CanViewThing";
         internal const string db_CanAddThing = "CanAddThing";
@@ -28,9 +28,9 @@ namespace MVCDemo.Models {
         #region Private Variables
         private string _Name;
         private bool _IsAdmin = false;
-        private bool _CanViewRole = false;
-        private bool _CanAddRole = false;
-        private bool _CanEditRole = false;
+        private bool _CanViewPerson = false;
+        private bool _CanAddPerson = false;
+        private bool _CanEditPerson = false;
         private bool _CanViewThing = false;
         private bool _CanAddThing = false;
         private bool _CanEditThing = false;
@@ -64,9 +64,9 @@ namespace MVCDemo.Models {
 
 
 
-        public bool CanViewRole { get { return _CanViewRole; } set { _CanViewRole = value; } }
-        public bool CanAddRole { get { return _CanAddRole; } set { _CanAddRole = value; } }
-        public bool CanEditRole { get { return _CanEditRole; } set { _CanEditRole = value; } }
+        public bool CanViewPerson { get { return _CanViewPerson; } set { _CanViewPerson = value; } }
+        public bool CanAddPerson { get { return _CanAddPerson; } set { _CanAddPerson = value; } }
+        public bool CanEditPerson { get { return _CanEditPerson; } set { _CanEditPerson = value; } }
         public bool CanViewThing { get { return _CanViewThing; } set { _CanViewThing = value; } }
         public bool CanAddThing { get { return _CanAddThing; } set { _CanAddThing = value; } }
         public bool CanEditThing { get { return _CanEditThing; } set { _CanEditThing = value; } }
@@ -120,9 +120,9 @@ namespace MVCDemo.Models {
             _ID = (int)dr[db_ID];
             _Name = (string)dr[db_Name];
             _IsAdmin = (bool)dr[db_IsAdmin];
-            _CanViewRole = (bool)dr[db_CanViewRole];
-            _CanAddRole = (bool)dr[db_CanAddRole];
-            _CanEditRole = (bool)dr[db_CanEditRole];
+            _CanViewPerson = (bool)dr[db_CanViewPerson];
+            _CanAddPerson = (bool)dr[db_CanAddPerson];
+            _CanEditPerson = (bool)dr[db_CanEditPerson];
             _CanViewThing = (bool)dr[db_CanViewThing];
             _CanAddThing = (bool)dr[db_CanAddThing];
             _CanEditThing = (bool)dr[db_CanEditThing];
