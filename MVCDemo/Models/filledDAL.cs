@@ -765,5 +765,8 @@ namespace MVCDemo.Models {
 
         #endregion
 
+        // used for student demo
+        public static int count = 0;
+
     }
 }

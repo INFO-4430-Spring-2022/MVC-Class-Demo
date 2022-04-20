@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h3>From Demo</h3>
+<partial name="../Sandwich/_Included" />
+<partial name="../Sandwich/_Included" />
+<partial name="../Sandwich/_Included" />
+<partial name="../Sandwich/_Included" />
+<div>
+    <a id="hypDemoLink" href="#">Click Me</a>
+</div>
+<div id="divDemoOutput" style="border: 2px solid #0A0;">
+</div>
+
+@section Scripts{
+<script>
+    $("#hypDemoLink").click(function(){
+        //alert("I was clicked.");
+        $.ajax({
+            url: "GetStuff"
+            ,success: function (data){
+                //alert("worked");
+                $("#divDemoOutput").append(data);
+            },
+            error: function(){
+                alert("nope");
+            }
+        });
+    });
+
+</script>
+}
