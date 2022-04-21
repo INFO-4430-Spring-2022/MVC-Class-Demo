@@ -1,0 +1,30 @@
+﻿@model Boolean
+@{
+    string fieldName = ViewData.TemplateInfo.HtmlFieldPrefix;
+    string propertyName = fieldName.Split(".").Last();
+    List<string> nameParts = new List<string>();
+    string partToAdd = "";
+    foreach(char ch in propertyName) {
+        if (char.IsUpper(ch)) {
+            if (partToAdd != "") {
+                nameParts.Add(partToAdd);
+                partToAdd = "";
+            }
+        }
+        partToAdd += ch;
+    }
+    if (partToAdd != "") {
+        nameParts.Add(partToAdd);
+    }
+    string verb = nameParts[0];
+    string actionName = nameParts[1];
+    string permissionGroup = string.Join(' ',nameParts.GetRange(2, nameParts.Count - 2));
+@if (Model){
+    <div class="role-perm">
+        <span class="role-perm-action">@actionName</span>
+        <span class="role-perm-group">@permissionGroup</span>
+    </div>
+    
+}else{
+    //nope
+}

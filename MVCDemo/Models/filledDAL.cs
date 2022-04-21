@@ -112,7 +112,7 @@ namespace MVCDemo.Models {
             return ret;
         }
 
-  
+
 
         #endregion
 
@@ -573,7 +573,7 @@ namespace MVCDemo.Models {
 
         #endregion
 
-        #region Users and Roles
+        #region User
 
         /// <summary>
         /// Gets the User correposponding with the given ID
@@ -669,20 +669,76 @@ namespace MVCDemo.Models {
 
 
 
-        internal static int AddUser(User user) {
-            throw new NotImplementedException();
+
+
+
+        /// <summary>
+        /// Attempts to add a database entry corresponding to the given User
+        /// </summary>
+        /// <remarks></remarks>
+
+        internal static int AddUser(User obj) {
+            if (obj == null) return -1;
+            SqlCommand comm = new SqlCommand("sproc_UserAdd");
+            try {
+                comm.Parameters.AddWithValue("@" + User.db_UserName, obj.UserName);
+                comm.Parameters.AddWithValue("@" + User.db_Salt, obj.Salt);
+                comm.Parameters.AddWithValue("@" + User.db_Password, obj.Password);
+                comm.Parameters.AddWithValue("@" + User.db_Email, obj.Email);
+                comm.Parameters.AddWithValue("@" + User.db_Role, obj.RoleID);
+                return AddObject(comm, "@" + User.db_ID);
+            } catch (Exception ex) {
+                DisplayException(ex);
+            }
+            return -1;
         }
 
-        internal static int RemoveUser(User user) {
-            throw new NotImplementedException();
+
+        /// <summary>
+        /// Attempts to the database entry corresponding to the given User
+        /// </summary>
+        /// <remarks></remarks>
+
+        internal static int UpdateUser(User obj) {
+            if (obj == null) return -1;
+            SqlCommand comm = new SqlCommand("sproc_UserUpdate");
+            try {
+                comm.Parameters.AddWithValue("@" + User.db_ID, obj.ID);
+                comm.Parameters.AddWithValue("@" + User.db_UserName, obj.UserName);
+                comm.Parameters.AddWithValue("@" + User.db_Salt, obj.Salt);
+                comm.Parameters.AddWithValue("@" + User.db_Password, obj.Password);
+                comm.Parameters.AddWithValue("@" + User.db_Email, obj.Email);
+                comm.Parameters.AddWithValue("@" + User.db_Role, obj.RoleID);
+                return UpdateObject(comm);
+            } catch (Exception ex) {
+                DisplayException(ex);
+            }
+            return -1;
         }
 
-        internal static int UpdateUser(User user) {
-            throw new NotImplementedException();
+
+        /// <summary>
+        /// Attempts to delete the database entry corresponding to the User
+        /// </summary>
+        /// <remarks></remarks>
+        internal static int RemoveUser(User obj) {
+            if (obj == null) return -1;
+            SqlCommand comm = new SqlCommand();
+            try {
+                comm.CommandText = "sproc_UserRemove";
+                comm.Parameters.AddWithValue("@" + User.db_ID, obj.ID);
+                return UpdateObject(comm);
+            } catch (Exception ex) {
+                DisplayException(ex);
+            }
+            return -1;
         }
 
 
 
+        #endregion
+
+        #region Role
 
         /// <summary>
         /// Gets the Role correposponding with the given ID
@@ -752,15 +808,84 @@ namespace MVCDemo.Models {
         }
 
 
-        internal static int AddRole(Role role) {
-            throw new NotImplementedException();
+        /// <summary>
+        /// Attempts to add a database entry corresponding to the given Role
+        /// </summary>
+        /// <remarks></remarks>
+
+        internal static int AddRole(Role obj) {
+            if (obj == null) return -1;
+            SqlCommand comm = new SqlCommand("sproc_RoleAdd");
+            try {
+                comm.Parameters.AddWithValue("@" + Role.db_Name, obj.Name);
+        comm.Parameters.AddWithValue("@" + Role.db_IsAdmin , obj.IsAdmin);
+        comm.Parameters.AddWithValue("@" + Role.db_CanViewPerson , obj.CanViewPerson);
+        comm.Parameters.AddWithValue("@" + Role.db_CanAddPerson , obj.CanAddPerson);
+        comm.Parameters.AddWithValue("@" + Role.db_CanEditPerson , obj.CanEditPerson);
+        comm.Parameters.AddWithValue("@" + Role.db_CanViewThing , obj.CanViewThing);
+        comm.Parameters.AddWithValue("@" + Role.db_CanAddThing , obj.CanAddThing);
+        comm.Parameters.AddWithValue("@" + Role.db_CanEditThing , obj.CanEditThing);
+        comm.Parameters.AddWithValue("@" + Role.db_CanViewThingType , obj.CanViewThingType);
+        comm.Parameters.AddWithValue("@" + Role.db_CanAddThingType , obj.CanAddThingType);
+        comm.Parameters.AddWithValue("@" + Role.db_CanEditThingType , obj.CanEditThingType);
+        comm.Parameters.AddWithValue("@" + Role.db_CanViewUser , obj.CanViewUser);
+        comm.Parameters.AddWithValue("@" + Role.db_CanAddUser , obj.CanAddUser);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditUser , obj.CanEditUser);
+                return AddObject(comm, "@" + Role.db_ID);
+            } catch (Exception ex) {
+                DisplayException(ex);
+            }
+            return -1;
         }
 
-        internal static int UpdateRole(Role role) {
-            throw new NotImplementedException();
+
+        /// <summary>
+        /// Attempts to the database entry corresponding to the given Role
+        /// </summary>
+        /// <remarks></remarks>
+
+        internal static int UpdateRole(Role obj) {
+            if (obj == null) return -1;
+            SqlCommand comm = new SqlCommand("sproc_RoleUpdate");
+            try {
+                comm.Parameters.AddWithValue("@" + Role.db_ID, obj.ID);
+                comm.Parameters.AddWithValue("@" + Role.db_Name, obj.Name);
+                comm.Parameters.AddWithValue("@" + Role.db_IsAdmin, obj.IsAdmin);
+                comm.Parameters.AddWithValue("@" + Role.db_CanViewPerson, obj.CanViewPerson);
+                comm.Parameters.AddWithValue("@" + Role.db_CanAddPerson, obj.CanAddPerson);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditPerson, obj.CanEditPerson);
+                comm.Parameters.AddWithValue("@" + Role.db_CanViewThing, obj.CanViewThing);
+                comm.Parameters.AddWithValue("@" + Role.db_CanAddThing, obj.CanAddThing);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditThing, obj.CanEditThing);
+                comm.Parameters.AddWithValue("@" + Role.db_CanViewThingType, obj.CanViewThingType);
+                comm.Parameters.AddWithValue("@" + Role.db_CanAddThingType, obj.CanAddThingType);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditThingType, obj.CanEditThingType);
+                comm.Parameters.AddWithValue("@" + Role.db_CanViewUser, obj.CanViewUser);
+                comm.Parameters.AddWithValue("@" + Role.db_CanAddUser, obj.CanAddUser);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditUser, obj.CanEditUser);
+                return UpdateObject(comm);
+            } catch (Exception ex) {
+                DisplayException(ex);
+            }
+            return -1;
         }
-        internal static int RemoveRole(Role role) {
-            throw new NotImplementedException();
+
+
+        /// <summary>
+        /// Attempts to delete the database entry corresponding to the Role
+        /// </summary>
+        /// <remarks></remarks>
+        internal static int RemoveRole(Role obj) {
+            if (obj == null) return -1;
+            SqlCommand comm = new SqlCommand();
+            try {
+                comm.CommandText = "sproc_RoleRemove";
+                comm.Parameters.AddWithValue("@" + Role.db_ID, obj.ID);
+                return UpdateObject(comm);
+            } catch (Exception ex) {
+                DisplayException(ex);
+            }
+            return -1;
         }
 
         #endregion

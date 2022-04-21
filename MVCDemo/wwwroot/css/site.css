@@ -51,7 +51,7 @@ body {
         display: block;
         text-align: right;
     }
-    
+
     #divTheme select {
         display: none;
     }
@@ -85,6 +85,10 @@ body {
         display: block;
     }
 
+table tr:hover{
+    background-color: #FDF; /*Make sure to change in themes.*/
+}
+
 .form-list {
     list-style: none;
     padding: 0;
@@ -98,6 +102,39 @@ body {
     .form-list input[type=submit] {
         width: 32%;
         margin: 0 34% 0 34%;
+    }
+
+
+.role-perm {
+    background-color: #060;
+    color: #FFF;
+    border: 2px solid #0A0;
+    padding: 0 .3em;
+    border-radius: .3em;
+    display: inline-block;
+    margin: .3em;
+    margin-bottom: 1em;
+    position: relative;
+    height: 2em;
+    width: 6em;
+}
+
+    .role-perm .role-perm-action {
+        position: absolute;
+        font-size: .8em;
+        bottom: -1.2em;
+        width: 7em;
+        left: 0;
+        background-color: #EFE;
+        color: #060;
+        border: 2px solid #0A0;
+        padding: 0 .3em;
+        border-radius: .5em;
+        
+    }
+
+    .role-perm .role-perm-group {
+        
     }
 /*nav{
     position:fixed !important;

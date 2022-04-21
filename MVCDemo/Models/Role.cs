@@ -62,8 +62,8 @@ namespace MVCDemo.Models {
             set { _Name = value; }
         }
 
-
-
+        public bool IsAdmin { get { return _IsAdmin; } set { _IsAdmin = value; } }
+        
         public bool CanViewPerson { get { return _CanViewPerson; } set { _CanViewPerson = value; } }
         public bool CanAddPerson { get { return _CanAddPerson; } set { _CanAddPerson = value; } }
         public bool CanEditPerson { get { return _CanEditPerson; } set { _CanEditPerson = value; } }

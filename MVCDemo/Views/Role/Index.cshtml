@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MVCDemo.Models.Role>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAdmin)
+            </th>
+            <th>
+                Permissions
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAdmin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanViewPerson, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanAddPerson, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanEditPerson, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanViewThing, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanAddThing, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanEditThing, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanViewThingType, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanAddThingType, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanEditThingType, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanViewUser, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanAddUser, "RolePermission")
+                @Html.DisplayFor(modelItem => item.CanEditUser, "RolePermission")
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { item.ID }) |
+                @Html.ActionLink("Details", "Details", new { item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -42,4 +42,9 @@ body {
     background-color: var(--nav-links);
 }
 
+table tr:hover {
+    background-color: var(--nav-links-hover);
+}
+
+
     

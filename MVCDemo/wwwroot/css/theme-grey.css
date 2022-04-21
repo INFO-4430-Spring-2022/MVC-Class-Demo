@@ -34,3 +34,6 @@ body {
     background-color: var(--nav-background);
 }
 
+table tr:hover {
+    background-color: var(--nav-links-hover);
+}

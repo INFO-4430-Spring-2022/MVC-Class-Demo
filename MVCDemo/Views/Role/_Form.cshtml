@@ -1,0 +1,72 @@
+﻿@model Role
+    <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanViewPerson" /> @Html.DisplayNameFor(model => model.CanViewPerson)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanAddPerson" /> @Html.DisplayNameFor(model => model.CanAddPerson)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanEditPerson" /> @Html.DisplayNameFor(model => model.CanEditPerson)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanViewThing" /> @Html.DisplayNameFor(model => model.CanViewThing)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanAddThing" /> @Html.DisplayNameFor(model => model.CanAddThing)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanEditThing" /> @Html.DisplayNameFor(model => model.CanEditThing)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanViewThingType" /> @Html.DisplayNameFor(model => model.CanViewThingType)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanAddThingType" /> @Html.DisplayNameFor(model => model.CanAddThingType)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanEditThingType" /> @Html.DisplayNameFor(model => model.CanEditThingType)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanViewUser" /> @Html.DisplayNameFor(model => model.CanViewUser)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanAddUser" /> @Html.DisplayNameFor(model => model.CanAddUser)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CanEditUser" /> @Html.DisplayNameFor(model => model.CanEditUser)
+                </label>
+            </div>
+           
