@@ -2,6 +2,7 @@
     <span>Hello, @ViewBag.CurrentUser.UserName</span>
     <a asp-action="Logout" asp-controller="User">Logout</a>
 } else {
+    <h1>Login</h1>
     <form asp-controller="User" asp-action="Login"
       method="post" id="frmLogin">
         <ul class="form-list">

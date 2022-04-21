@@ -1,60 +1,104 @@
 html {
-  font-size: 14px;
+    font-size: .8em;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 1em;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
-.dropdown-picker{
+.dropdown-picker {
     border: 1px solid #AAA;
 }
 
-.dropdown-picker ol {
-    list-style: none;
-    padding: 0;
-}
-    .dropdown-picker li{
+    .dropdown-picker ol {
+        list-style: none;
+        padding: 0;
+    }
+
+    .dropdown-picker li {
         padding: .3em;
     }
 
-.dropdown-picker li:hover {
-    background-color: #AAA;
-    padding: .3em;
+        .dropdown-picker li:hover {
+            background-color: #AAA;
+            padding: .3em;
+        }
+
+#divTheme {
+    position: absolute;
+    top: 3.5em;
+    right: 0;
+    border-radius: 0 0 0 .5em;
+    padding: .5em;
 }
 
-#divLoginPanel{
+    #divTheme label::after, #divLoginPanel h1::after {
+        content: ' \25BC';
+    }
+
+    #divTheme label {
+        display: block;
+        text-align: right;
+    }
+    
+    #divTheme select {
+        display: none;
+    }
+
+    #divTheme:hover label::after, #divLoginPanel:hover h1::after {
+        content: ' \25C0';
+    }
+
+    #divTheme:hover select {
+        display: inline-block;
+    }
+
+#divLoginPanel {
     position: absolute;
     top: 0;
     right: 0;
     border-radius: 0 0 0 1em;
 }
 
-#divTheme {
-    position: absolute;
-    top: 3.5em;
-    left: 0;
-    border-radius: 0 0 .5em 0;
-    padding: .5em;
-}
+    #divLoginPanel h1 {
+        font-size: inherit;
+        text-align: right;
+        padding: 1em;
+    }
 
-.form-list{
+    #divLoginPanel form {
+        display: none;
+    }
+
+    #divLoginPanel:hover form {
+        display: block;
+    }
+
+.form-list {
     list-style: none;
     padding: 0;
     margin: 1em;
 }
 
+    .form-list label {
+        width: 5.2em;
+    }
+
+    .form-list input[type=submit] {
+        width: 32%;
+        margin: 0 34% 0 34%;
+    }
 /*nav{
     position:fixed !important;
     top:0;

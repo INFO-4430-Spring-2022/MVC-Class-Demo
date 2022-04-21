@@ -18,11 +18,12 @@ body {
 
     .navbar a {
         color: var(--nav-links);
+        border-bottom: 2px solid var(--nav-background);
     }
 
     .navbar a:hover {
         color: var(--nav-links-hover);
-        text-decoration: underline;
+        border-bottom-color: var(--nav-links-hover);
     }
 
 #divLoginPanel {
@@ -32,3 +33,4 @@ body {
 #divTheme {
     background-color: var(--nav-background);
 }
+

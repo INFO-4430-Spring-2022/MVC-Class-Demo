@@ -21,10 +21,14 @@ body {
     }
 
     .navbar a:hover {
-        color: var(--nav-links-hover);
-        text-decoration: underline;
+        color: var(--nav-background);
+        background-color: var(--nav-links-hover);
     }
 
 #divLoginPanel {
+    background-color: var(--nav-background);
+}
+
+#divTheme {
     background-color: var(--nav-background);
 }

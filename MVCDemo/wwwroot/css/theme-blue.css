@@ -19,13 +19,20 @@ body {
 
     .navbar a {
         color: var(--nav-links);
+        border: 2px solid var(--nav-links-hover);
+        border-radius: .5em;
+        margin: 0.3em;
     }
 
         .navbar a:hover {
-            color: var(--nav-links-hover);
-            text-decoration: underline;
+            color: var(--nav-background);
+            background-color: var(--nav-links-hover);
         }
 
 #divLoginPanel {
+    background-color: var(--nav-background);
+}
+
+#divTheme {
     background-color: var(--nav-background);
 }
