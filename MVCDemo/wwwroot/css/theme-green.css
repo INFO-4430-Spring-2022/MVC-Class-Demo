@@ -1,0 +1,31 @@
+﻿:root {
+    --text-color: #030;
+    --text-background: #EFE;
+    --nav-background: #363;
+    --nav-links: #FFF;
+    --nav-links-hover: #ACB;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--text-background);
+}
+
+.navbar {
+    background-color: var(--nav-background);
+    color: var(--nav-links);
+}
+
+    .navbar a {
+        color: var(--nav-links);
+    }
+
+        .navbar a:hover {
+            color: var(--nav-links-hover);
+            text-decoration: underline;
+        }
+
+#divLoginPanel {
+    background-color: var(--nav-background);
+}

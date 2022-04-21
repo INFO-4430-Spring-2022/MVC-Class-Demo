@@ -78,10 +78,44 @@ function autoSelects(evt) {
 }
 
 var login = document.getElementById("frmLogin");
-alert(login);
-if (typeof login !== "undefined") {
+//alert(login);
+if (typeof login !== null) {
     // we have a login form.
     login.addEventListener("submit", function () {
         alert("form being submitted.");
     });
+}
+
+var themer = document.getElementById("ddlTheme");
+if (typeof themer !== null) {
+    themer.addEventListener("change", function () {
+        var newStyle = this.value;
+        var stylerID = this.getAttribute("data-style");
+        if (typeof stylerID !== "undefined" && stylerID !== "") {
+            setTheme(stylerID,newStyle);
+        }
+    });
+}
+
+function setTheme(styID,color) {
+    var styler = document.getElementById(styID);
+    var stylePath = styler.href;
+    var refParts = stylePath.split("/");
+    // change the style.
+    refParts[refParts.length - 1] = "theme-" + color + ".css";
+    styler.href = refParts.join("/");
+    if (localStorage) {
+        localStorage.setItem("theme", JSON.stringify({ themer: styID, color: color }));
+    }
+}
+
+// check if storage is supported.
+if (localStorage) {
+    var themeSet = localStorage.getItem("theme");
+    // check to see if theme is already set.
+    if (themeSet !== null) {
+        // preset theme exists
+        var themeSettings = JSON.parse(themeSet);
+        setTheme(themeSettings.themer, themeSettings.color);
+    }
 }
