@@ -4,3 +4,55 @@
 <h1>@ViewData["Title"]</h1>
 <p>This is another page.</p>
 <p>Use this page to detail your site's privacy policy.</p>
+<div>
+    <form onsubmit="return false;">
+        <textarea id="txtRawData"></textarea>
+        <div>
+            <button id="btnEncrypt">Encrypt</button>
+            <button id="btnDecrypt">Decrypt</button>
+        </div>
+        <textarea id="txtParsedData"></textarea>
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+        var input = document.getElementById("txtRawData");
+        var output = document.getElementById("txtParsedData");
+        var btnEncrypt = document.getElementById("btnEncrypt");
+        var btnDecrypt = document.getElementById("btnDecrypt");
+
+        btnEncrypt.onclick = function(){
+            
+            $.ajax({
+                url: "Encrypt",
+                method: "post",
+                data: {data:input.value},
+                success: function(resp){
+                    output.value = resp.data;
+                },
+                error: function(){
+
+                }
+
+            });
+
+
+        };
+
+        btnDecrypt.onclick = function(){
+                      $.ajax({
+                url: "Decrypt",
+                method: "post",
+                data: {data:input.value},
+                success: function(resp){
+                    output.value = resp.data;
+                },
+                error: function(){
+
+                }
+
+            });
+        };
+    </script>
+}

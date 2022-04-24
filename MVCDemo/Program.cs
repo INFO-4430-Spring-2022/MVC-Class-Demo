@@ -13,6 +13,13 @@ builder.Services.AddControllersWithViews();
 // IV should be at least 24 Base-64 characters; first 16 bytes will be used.
 Tools.DataEncryptor.SetKeyBase64("34a490asdlkJ0945lkjads09743145kj", "MVCExamples+4430+2022");
 
+string readOnlyStr = builder.Configuration.GetConnectionString("ReadOnly");
+string editOnlyStr = builder.Configuration.GetConnectionString("EditOnly");
+MVCDemo.Models.fDAL.SetConnectionStrings(readOnlyStr, editOnlyStr);
+
+//string roDecrypt = Tools.DataEncryptor.Unprotect(readOnlyStr);
+//string edDecrypt = Tools.DataEncryptor.Protect(editOnlyStr);
+//MVCDemo.Models.fDAL.SetConnectionStrings(roDecrypt, edDecrypt);
 
 var app = builder.Build();
 

@@ -8,10 +8,16 @@ using System.Configuration;
 
 namespace MVCDemo.Models {
     public class fDAL {
-        private static string ReadOnlyConnectionString = "Server=localhost; Database=MVCDemo;Trusted_Connection=True;Encrypt=False";
-        private static string EditOnlyConnectionString = "Server=localhost; Database=MVCDemo;Trusted_Connection=True;Encrypt=False";
+        private static string ReadOnlyConnectionString = ""; // = "Server=localhost; Database=MVCDemo;Trusted_Connection=True;Encrypt=False";
+        private static string EditOnlyConnectionString = ""; // = "Server=localhost; Database=MVCDemo;Trusted_Connection=True;Encrypt=False";
         private fDAL() {
         }
+
+        public static void SetConnectionStrings(string readOnly, string editOnly) {
+            ReadOnlyConnectionString = readOnly;
+            EditOnlyConnectionString = editOnly;
+        }
+
         internal enum dbAction {
             Read,
             Edit
@@ -818,19 +824,19 @@ namespace MVCDemo.Models {
             SqlCommand comm = new SqlCommand("sproc_RoleAdd");
             try {
                 comm.Parameters.AddWithValue("@" + Role.db_Name, obj.Name);
-        comm.Parameters.AddWithValue("@" + Role.db_IsAdmin , obj.IsAdmin);
-        comm.Parameters.AddWithValue("@" + Role.db_CanViewPerson , obj.CanViewPerson);
-        comm.Parameters.AddWithValue("@" + Role.db_CanAddPerson , obj.CanAddPerson);
-        comm.Parameters.AddWithValue("@" + Role.db_CanEditPerson , obj.CanEditPerson);
-        comm.Parameters.AddWithValue("@" + Role.db_CanViewThing , obj.CanViewThing);
-        comm.Parameters.AddWithValue("@" + Role.db_CanAddThing , obj.CanAddThing);
-        comm.Parameters.AddWithValue("@" + Role.db_CanEditThing , obj.CanEditThing);
-        comm.Parameters.AddWithValue("@" + Role.db_CanViewThingType , obj.CanViewThingType);
-        comm.Parameters.AddWithValue("@" + Role.db_CanAddThingType , obj.CanAddThingType);
-        comm.Parameters.AddWithValue("@" + Role.db_CanEditThingType , obj.CanEditThingType);
-        comm.Parameters.AddWithValue("@" + Role.db_CanViewUser , obj.CanViewUser);
-        comm.Parameters.AddWithValue("@" + Role.db_CanAddUser , obj.CanAddUser);
-                comm.Parameters.AddWithValue("@" + Role.db_CanEditUser , obj.CanEditUser);
+                comm.Parameters.AddWithValue("@" + Role.db_IsAdmin, obj.IsAdmin);
+                comm.Parameters.AddWithValue("@" + Role.db_CanViewPerson, obj.CanViewPerson);
+                comm.Parameters.AddWithValue("@" + Role.db_CanAddPerson, obj.CanAddPerson);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditPerson, obj.CanEditPerson);
+                comm.Parameters.AddWithValue("@" + Role.db_CanViewThing, obj.CanViewThing);
+                comm.Parameters.AddWithValue("@" + Role.db_CanAddThing, obj.CanAddThing);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditThing, obj.CanEditThing);
+                comm.Parameters.AddWithValue("@" + Role.db_CanViewThingType, obj.CanViewThingType);
+                comm.Parameters.AddWithValue("@" + Role.db_CanAddThingType, obj.CanAddThingType);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditThingType, obj.CanEditThingType);
+                comm.Parameters.AddWithValue("@" + Role.db_CanViewUser, obj.CanViewUser);
+                comm.Parameters.AddWithValue("@" + Role.db_CanAddUser, obj.CanAddUser);
+                comm.Parameters.AddWithValue("@" + Role.db_CanEditUser, obj.CanEditUser);
                 return AddObject(comm, "@" + Role.db_ID);
             } catch (Exception ex) {
                 DisplayException(ex);
