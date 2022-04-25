@@ -1,40 +1,44 @@
 ﻿@model MVCDemo.Models.Thing
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TypeID" class="control-label"></label>
-@*                <input asp-for="TypeID" class="form-control" /> *@
-@*            <select asp-for="TypeID">
-                @foreach (ThingType tType in ViewBag.ThingTypes)                {
-                    <option value="@tType.ID" >@tType.Name</option>
-                }
-            </select>*@
-                @*<select asp-for="TypeID" asp-items="ViewBag.ThingTypes" ></select>*@
-                <input type="text" id="txtTypeLookup" />
-                <input type="hidden" asp-for="TypeID" />
-                <div id="divOutput" class="dropdown-picker"></div>
-              <span asp-validation-for="TypeID" class="text-danger"></span>
+<input type="hidden" asp-for="ID" />
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Description" class="control-label"></label>
+    <input asp-for="Description" class="form-control" />
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="TypeID" class="control-label"></label>
+    @*                <input asp-for="TypeID" class="form-control" /> *@
+    @*            <select asp-for="TypeID">
+        @foreach (ThingType tType in ViewBag.ThingTypes)                {
+        <option value="@tType.ID" >@tType.Name</option>
+        }
+        </select>*@
+    @*<select asp-for="TypeID" asp-items="ViewBag.ThingTypes" ></select>*@
+    <input type="text" id="txtTypeLookup" />
+    <input type="hidden" asp-for="TypeID" />
+    <div id="divOutput" class="dropdown-picker"></div>
+    <span asp-validation-for="TypeID" class="text-danger"></span>
 
-            </div>
+</div>
 
 @*                    <div class="form-group">
-                <label asp-for="TypeID" class="control-label"></label>
-                <select asp-for="TypeID" asp-items="ViewBag.Types"></select>
-                <span asp-validation-for="TypeID" class="text-danger"></span>
-            </div>*@
-                        @*<div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
-                </div>*@
+    <label asp-for="TypeID" class="control-label"></label>
+    <select asp-for="TypeID" asp-items="ViewBag.Types"></select>
+    <span asp-validation-for="TypeID" class="text-danger"></span>
+    </div>*@
+@*<div class="form-group">
+    <label asp-for="ID" class="control-label"></label>
+    <input asp-for="ID" class="form-control" />
+    <span asp-validation-for="ID" class="text-danger"></span>
+    </div>*@
+
+<script>
+    var autoCompleteUrl = "@Url.Action("List","ThingType")";
+</script>

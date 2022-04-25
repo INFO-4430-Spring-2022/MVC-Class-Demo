@@ -31,7 +31,7 @@ if (autocomplete !== null) {
         evt = evt || window.event;
         var searchText = this.value;
         $.ajax({
-            url: "../ThingType/List"
+            url: autoCompleteUrl
             , data: { search: searchText }
             , success: function (resp) {
                 // alert(resp);
