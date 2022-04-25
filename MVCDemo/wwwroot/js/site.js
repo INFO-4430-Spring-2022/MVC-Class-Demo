@@ -11,11 +11,15 @@ for (var cL of cardLinks) {
 }
 
 function handleCardClick() {
+    var perID = this.getAttribute("data-id");
     $.ajax({
-        url: "Card"
+        url: "/Person/Find"
         , method: "get"
+        , data: { id: perID }
         , success: function (resp) {
-            alert(resp);
+            //alert(JSON.stringify(resp));
+            var perObj = resp.data;
+            alert("This is " + perObj.firstName)
         }
         , error: function () {
             alert("Oops");
@@ -30,12 +34,14 @@ if (autocomplete !== null) {
     function handleKeyUp(evt) {
         evt = evt || window.event;
         var searchText = this.value;
+        var fieldToUse = this.getAttribute("data-update");
         $.ajax({
             url: autoCompleteUrl
             , data: { search: searchText }
             , success: function (resp) {
                 // alert(resp);
                 var outer = document.getElementById("divOutput");
+                outer.setAttribute("data-hidden", fieldToUse);
                 outer.innerHTML = resp;
             }, error: function () {
                 alert("Oops");
@@ -68,9 +74,13 @@ function autoSelects(evt) {
     evt = evt || window.event;
 
     var eleClicked = evt.target || evt.srcElement;
+    //var gParent = eleClicked.parentNode.parentNode;
+    //var fieldToUpdate = gParent.getAttribute("data-hidden");
+    var fieldToUpdate = this.getAttribute("data-hidden");
+    //alert(fieldToUpdate);
     var idOfObject = eleClicked.getAttribute("data-id");
     //alert(eleClicked.innerText + " " + idOfObject + " was clicked");
-    var actualValue = document.getElementById("TypeID");
+    var actualValue = document.getElementById(fieldToUpdate);
     actualValue.value = idOfObject;
     //alert( eleClicked.tagName +  " was clicked");
     //alert( this.tagName +  " was clicked");

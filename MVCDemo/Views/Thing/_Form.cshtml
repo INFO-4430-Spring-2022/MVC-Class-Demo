@@ -21,7 +21,7 @@
         }
         </select>*@
     @*<select asp-for="TypeID" asp-items="ViewBag.ThingTypes" ></select>*@
-    <input type="text" id="txtTypeLookup" />
+    <input type="text" id="txtTypeLookup" data-update="TypeID" />
     <input type="hidden" asp-for="TypeID" />
     <div id="divOutput" class="dropdown-picker"></div>
     <span asp-validation-for="TypeID" class="text-danger"></span>
